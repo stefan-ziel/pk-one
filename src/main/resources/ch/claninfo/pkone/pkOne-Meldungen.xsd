@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
+	<xs:simpleType name="VersionType">
+		<xs:annotation>
+			<xs:documentation>Mögliche Versionen des Protokolls.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="0.1">
+				<xs:annotation>
+					<xs:documentation>Version für den Prototyp</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:complexType name="MessageType">
+		<xs:annotation>
+			<xs:documentation>Alle Meldungen enthalten zumindest die Version</xs:documentation>
+		</xs:annotation>
+		<xs:attribute type="pko:VersionType" name="Version"/>
+	</xs:complexType>
+
+	<xs:complexType name="StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Meldungen zum Starten eines Ablaufs</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:MessageType">
+				<xs:sequence>
+					<xs:element type="xs:string" name="ProzessName"/>
+					<xs:element type="xs:long" name="Vsnum"/>
+					<xs:element type="xs:date" name="Valuta">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="WFMessageType">
+		<xs:annotation>
+			<xs:documentation>Meldungen zum weiterführen eines Ablaufes</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:MessageType">
+				<xs:sequence>
+					<xs:element type="xs:string" name="ProzessID"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AusweisType">
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element name="Stammdaten" minOccurs="0" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element type="xs:long" name="Vsnum"/>
+								<xs:element type="xs:string" name="Name" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Nachname</xs:documentation>
+										<xs:documentation xml:lang="fr">Nom</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:string" name="Vorname" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Vorname</xs:documentation>
+										<xs:documentation xml:lang="fr">Prénom</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:date" name="Gebdat" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Geburtsdatum</xs:documentation>
+										<xs:documentation xml:lang="fr">Date de naissance</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:string" name="Ahvnr" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Sovnr" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Mitnum" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Adresse1" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Adresse2" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Adresse3" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Adresse4" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Land" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Plz" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Ort" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Telefon1" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Telefon2" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Telefax1" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Telefax2" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Email" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Einfid" minOccurs="0" maxOccurs="1"/>
+								<xs:element type="xs:string" name="Einvod" minOccurs="0" maxOccurs="1"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Werte" minOccurs="0" maxOccurs="1">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element type="xs:date" name="Valuta">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Vslohn" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Massgebender Jahreslohn</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Versjl" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Versicherter Jahreslohn</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Begrad" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Beschäftigungsgrad</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="MaxEKS" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Altren" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Altersrente</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Ivren" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Invalidenrente</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element type="xs:decimal" name="Egaren" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Ehegattenrente</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<!--  usw.  -->
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Erweitert" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Name" type="xs:NMTOKEN"/>
+								<xs:element name="Wert" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Nummer" type="xs:integer"/>
+								<xs:element name="Text" minOccurs="0" maxOccurs="unbounded">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Sprache" type="xs:language"/>
+											<xs:element name="Text" type="xs:string"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="DocumentType">
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Das Dokument wird entwerder als Elementinhalt in BASE 6 to 4 Kodierung übergeben oder ist unter HRef abrufbar.</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Name" type="xs:string"/>
+								<xs:element name="MimeType" type="xs:string"/>
+								<xs:element name="HRef" type="xs:anyURI"/>
+								<xs:element name="Dokument" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Hier beginnen die eigentlichen Meldungen -->
+	
+	<xs:element name="EKSimStartRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:StartMessageType">
+					<xs:sequence>
+						<xs:element type="xs:decimal" name="SimEKS" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="EKSimStartResponse" type="pko:AusweisType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor Einkauf zurück die in Portal STEP 3 angezeigt werden sollen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EKSimExecuteRequest">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:sequence>
+						<xs:element type="xs:decimal" name="SimEKS">
+							<xs:annotation>
+								<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+		
+	<xs:element name="EKSimExecuteResponse" type="pko:AusweisType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach Einkauf zurück die in Portal STEP 3 angezeigt werden sollen</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	<xs:element name="EKSimEndRequest" type="pko:WFMessageType"/>
+
+	<xs:element name="EKSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommet ein VA in PDF-Format</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+	
+</xs:schema>
