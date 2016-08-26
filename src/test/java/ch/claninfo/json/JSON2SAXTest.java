@@ -14,8 +14,6 @@ import javax.xml.validation.ValidatorHandler;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import ch.claninfo.common.xml.StreamSerializer;
-
 /**
  * 
  */
@@ -32,12 +30,9 @@ public class JSON2SAXTest {
 	@Test
 	public void testParseReaderStringContentHandler() throws JSONParseException, IOException, SAXException {
 		InputStream is = getClass().getResourceAsStream("EKSimExecuteResponse.json"); //$NON-NLS-1$
-		JSON2SAX.parse(new InputStreamReader(is), "EKSimExecuteResponse", new StreamSerializer(System.out)); //$NON-NLS-1$
-
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = factory.newSchema(getClass().getResource("/ch/claninfo/pkone/pkOne-Meldungen.xsd")); //$NON-NLS-1$
 		ValidatorHandler validator = schema.newValidatorHandler();
-		is = getClass().getResourceAsStream("EKSimExecuteResponse.json"); //$NON-NLS-1$
 		JSON2SAX.parse(new InputStreamReader(is), "EKSimExecuteResponse", validator); //$NON-NLS-1$
 	}
 

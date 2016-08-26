@@ -22,10 +22,5 @@
       <artifactId>junit</artifactId>
       <version>4.12</version>
     </dependency>
-    		<dependency>
-			<groupId>framework</groupId>
-			<artifactId>framework-base</artifactId>
-			<version>1.13-SNAPSHOT</version>
-		</dependency>
   </dependencies>
 </project>
