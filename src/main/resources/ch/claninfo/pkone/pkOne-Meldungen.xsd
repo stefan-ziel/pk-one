@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
-	<xs:simpleType name="VersionType">
-		<xs:annotation>
-			<xs:documentation>Mögliche Versionen des Protokolls.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="0.1">
-				<xs:annotation>
-					<xs:documentation>Version für den Prototyp</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	
 	<xs:complexType name="MessageType">
 		<xs:annotation>
 			<xs:documentation>Alle Meldungen enthalten zumindest die Version</xs:documentation>
 		</xs:annotation>
-		<xs:attribute type="pko:VersionType" name="Version"/>
+		<xs:attribute type="pko:VersionType" name="Version" fixed="0.1"/>
 	</xs:complexType>
 
 	<xs:complexType name="StartMessageType">
@@ -28,7 +15,8 @@
 			<xs:extension base="pko:MessageType">
 				<xs:sequence>
 					<xs:element type="xs:string" name="ProzessName"/>
-					<xs:element type="xs:long" name="Vsnum"/>
+					<xs:element type="xs:string" name="Penum"/>
+					<xs:element type="xs:string" name="Mitnum"/>
 					<xs:element type="xs:date" name="Valuta">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
@@ -198,20 +186,10 @@
 
 	<!-- Hier beginnen die eigentlichen Meldungen -->
 	
-	<xs:element name="EKSimStartRequest">
-		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="pko:StartMessageType">
-					<xs:sequence>
-						<xs:element type="xs:decimal" name="SimEKS" minOccurs="0" maxOccurs="1">
-							<xs:annotation>
-								<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
-				</xs:extension>
-			</xs:complexContent>
-		</xs:complexType>
+	<xs:element name="EKSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer Einkaufssimulation</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 	
 	<xs:element name="EKSimStartResponse" type="pko:AusweisType">
@@ -221,6 +199,9 @@
 	</xs:element>
 
 	<xs:element name="EKSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe des Einkaufsbetrags</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
@@ -242,13 +223,15 @@
 		</xs:annotation>
 	</xs:element>
 	
-	<xs:element name="EKSimEndRequest" type="pko:WFMessageType"/>
+	<xs:element name="EKSimEndRequest" type="pko:WFMessageType">
+		<xs:annotation>
+			<xs:documentation>Beenden der Einkaufssimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 
 	<xs:element name="EKSimEndResponse" type="pko:DocumentType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommet ein VA in PDF-Format</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	
-	
 </xs:schema>
