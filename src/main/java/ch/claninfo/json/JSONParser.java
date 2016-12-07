@@ -19,7 +19,11 @@ public class JSONParser extends AbstractJSONParser {
 	Stack<Object> objects = new Stack<Object>();
 	String currentName;
 
-	private JSONParser(Reader pIn) throws IOException {
+	/**
+	 * @param pIn json input document
+	 * @throws IOException
+	 */
+	protected JSONParser(Reader pIn) throws IOException {
 		super(pIn);
 	}
 
@@ -45,6 +49,13 @@ public class JSONParser extends AbstractJSONParser {
 		if (!objects.empty()) {
 			objects.pop();
 		}
+	}
+
+	/**
+	 * @return the root
+	 */
+	protected Map<String, Object> getRoot() {
+		return root;
 	}
 
 	@Override

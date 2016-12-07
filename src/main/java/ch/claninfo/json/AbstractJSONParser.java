@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
  */
 public abstract class AbstractJSONParser {
 
-	public static final DateFormat STD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS'z'"); //$NON-NLS-1$
+	public static final DateFormat STD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS"); //$NON-NLS-1$
 
 	int line;
 	int col;
@@ -234,7 +234,9 @@ public abstract class AbstractJSONParser {
 
 	private void parseStringOrDate(char pDelim) throws JSONParseException, IOException {
 		String res = parseString(pDelim);
-		if (res.length() > 21 && res.charAt(4) == '-' && res.charAt(7) == '-' && res.charAt(10) == 'T' && res.charAt(13) == ':' && res.charAt(16) == ':' && res.charAt(19) == '.') {
+		// 2015-10-01T00:00:00.0
+		// 0123456789012345678901
+		if (res.length() >= 20 && res.charAt(4) == '-' && res.charAt(7) == '-' && res.charAt(10) == 'T' && res.charAt(13) == ':' && res.charAt(16) == ':' && res.charAt(19) == '.') {
 			try {
 				value(STD_DATE_FORMAT.parse(res));
 				return;

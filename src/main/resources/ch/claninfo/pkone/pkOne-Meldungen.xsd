@@ -17,7 +17,6 @@
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
 				<xs:sequence>
-					<xs:element type="xs:string" name="ProzessName"/>
 					<xs:element type="xs:string" name="Penum"/>
 					<xs:element type="xs:string" name="Mitnum"/>
 					<xs:element type="xs:date" name="Valuta">
