@@ -1,4 +1,4 @@
-/* $Id: JSONParser.java 54182 2016-11-10 17:33:05Z zis $ */
+/* $Id$ */
 
 package ch.claninfo.json;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
- *
+ * Creates a structure of nested maps and lists to represent a JSON object
  */
 public class JSONParser extends AbstractJSONParser {
 
