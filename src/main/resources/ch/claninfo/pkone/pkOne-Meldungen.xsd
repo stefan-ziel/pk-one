@@ -45,13 +45,19 @@
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
 				<xs:sequence>
-					<xs:element type="xs:decimal" name="MaxEKS" minOccurs="0" maxOccurs="1">
-						<xs:annotation>
-							<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
-						</xs:annotation>
+					<xs:element name="Applikation">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element type="xs:decimal" name="MaxEKS" minOccurs="0" maxOccurs="1">
+									<xs:annotation>
+										<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
 					</xs:element>
 
-					<xs:element name="Erweitert" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="Name" type="xs:NMTOKEN"/>
@@ -79,14 +85,13 @@
 				<xs:sequence>
 					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Das Dokument wird entwerder als Elementinhalt in BASE 6 to 4 Kodierung übergeben oder ist unter HRef abrufbar.</xs:documentation>
+							<xs:documentation>Das Dokument wird als Elementinhalt in BASE 6 to 4 Kodierung übergeben.</xs:documentation>
 						</xs:annotation>
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="Name" type="xs:string"/>
 								<xs:element name="MimeType" type="xs:string"/>
-								<xs:element name="HRef" type="xs:anyURI"/>
-								<xs:element name="Dokument" type="xs:string"/>
+								<xs:element name="Content" type="xs:string"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>

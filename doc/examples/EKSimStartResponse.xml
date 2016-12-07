@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EKSimStartResponse version="0.1">
+	<Sprache>de</Sprache>
 	<ProzessID>213414</ProzessID>
-	<Stammdaten>
-		<Vsnum>20597</Vsnum>
-		<Name>Eicher</Name>
-		<Vorname>Maria</Vorname>
-		...
-	</Stammdaten>
-	<Werte>
-		<Valuta>2016-07-01</Valuta>
-		<Vslohn>100000</Vslohn>
-		<Versjl>92629</Versjl>
-		<Begrad>60</Begrad>
+	<Applikation>
 		<MaxEKS>305003.65</MaxEKS>
-		<Altren>34095</Altren>
-		<Ivren>55557</Ivren>
-		<Egaren>37052</Egaren>
-	</Werte>
-	<Erweitert>
+	</Applikation>
+	<Simulation>
 		<Wert Name="MaxEKSTar">408802.65</Wert>
 		<Wert Name="Sparkap">103799.00</Wert>
-	</Erweitert>
+	</Simulation>
 	<Meldung Nummer="4711">
-		<Text Sprache="de">*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten.</Text>
+		<Nummer>4711</Nummer>
+		<Text>*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten.</Text>
 	</Meldung>
 </EKSimStartResponse>
