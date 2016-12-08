@@ -23,4 +23,32 @@
       <version>4.12</version>
     </dependency>
   </dependencies>
+  <organization>
+  	<name>clan Informatik AG</name>
+  	<url>http://www.claninformatik.ch/</url>
+  </organization>
+  <scm>
+  	<url>git://github.com/stefan-ziel/pk-one</url>
+  </scm>
+  <issueManagement>
+  	<system>JIRA</system>
+  	<url>https://jira.claninfo.ch/jira/browse/SER</url>
+  </issueManagement>
+  <distributionManagement>
+    <repository>
+      <id>internal.release.upload</id>
+      <name>Internes Repository fuer RELEASES</name>
+      <url>http://subversion/uploads/release</url>
+    </repository>
+    <snapshotRepository>
+      <id>internal.snapshot.upload</id>
+      <name>Internes Repository fuer SNAPSHOTS</name>
+      <url>http://subversion/uploads/snapshot</url>
+    </snapshotRepository>
+    <site>
+      <id>site</id>
+      <name>Interne Webseite fuer Site Reports</name>
+      <url>http://subversion/uploads/site/${project.version}/claninfo</url>
+    </site>
+  </distributionManagement>
 </project>
