@@ -2,12 +2,12 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
 	<xs:complexType name="MessageType">
 		<xs:annotation>
-			<xs:documentation>Alle Meldungen enthalten zumindest die Version</xs:documentation>
+			<xs:documentation>Alle Meldungen enthalten zumindest die Version und die Sprache</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="Version" fixed="0.1"/>
 			<xs:element name="Sprache" type="xs:language"/>
 		</xs:sequence>
-		<xs:attribute type="xs:string" name="Version" fixed="0.1"/>
 	</xs:complexType>
 
 	<xs:complexType name="StartMessageType">
@@ -19,7 +19,7 @@
 				<xs:sequence>
 					<xs:element type="xs:string" name="Penum"/>
 					<xs:element type="xs:string" name="Mitnum"/>
-					<xs:element type="xs:date" name="Valuta">
+					<xs:element type="xs:dateTime" name="Valuta">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
 						</xs:annotation>
@@ -46,7 +46,7 @@
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
 				<xs:sequence>
-					<xs:element name="Applikation">
+					<xs:element name="Applikation" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element type="xs:decimal" name="MaxEKS" minOccurs="0" maxOccurs="1">
@@ -62,7 +62,11 @@
 						<xs:complexType>
 							<xs:sequence>
 								<xs:element name="Name" type="xs:NMTOKEN"/>
-								<xs:element name="Wert" type="xs:string"/>
+								<xs:element name="Wert">
+									<xs:simpleType>
+										<xs:union memberTypes="xs:decimal xs:dateTime"/>
+									</xs:simpleType>
+								</xs:element>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -75,6 +79,8 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+
+					<xs:element ref="pko:Fehler" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -96,10 +102,20 @@
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
+					<xs:element ref="pko:Fehler" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+
+	<xs:element name="Fehler">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Meldung" type="xs:string"/>
+				<xs:element name="Details" type="xs:string" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 
 	<!-- Hier beginnen die eigentlichen Meldungen -->
 

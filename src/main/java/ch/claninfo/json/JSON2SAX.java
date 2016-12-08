@@ -4,6 +4,7 @@ package ch.claninfo.json;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Date;
 import java.util.Stack;
 
 import org.xml.sax.ContentHandler;
@@ -94,7 +95,12 @@ public class JSON2SAX extends AbstractJSONParser {
 			try {
 				AttributesImpl attrs = new AttributesImpl();
 				out.startElement(NS, name, name, attrs);
-				String s = pObject.toString();
+				String s;
+				if (pObject instanceof Date) {
+					s = STD_DATE_FORMAT.format(pObject);
+				} else {
+					s = pObject.toString();
+				}
 				out.characters(s.toCharArray(), 0, s.length());
 				out.endElement(NS, name, name);
 			}
