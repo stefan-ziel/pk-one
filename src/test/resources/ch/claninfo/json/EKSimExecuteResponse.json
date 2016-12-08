@@ -1,30 +1,17 @@
-{"ProzessID":213414, 
- "Stammdaten":{
-   "Vsnum":20597,
-	 "Name":"Eicher",
-	 "Vorname":"Maria"
+{
+	"Version":"0.1",
+	"Sprache":"de",
+	"ProzessID":213414, 
+	"Applikation":{
+		"MaxEKS":305003.65
 	},
-	"Werte":{
-		"Valuta":"2016-07-01",
-		"Vslohn":100000,
-		"Versjl":92629,
-		"Begrad":60,
-		"MaxEKS":305003.65,
-		"Altren":55586,
-		"Ivren":55557,
-		"Egaren":37052
-	},
-	"Erweitert":[
+	"Simulation":[
 		{"Name":"MaxEKSTar","Wert":408802.65},
 		{"Name":"Sparkap","Wert":103799.00}
 	],
 	"Meldung":[
 	  { "Nummer":"4711",
-		  "Text":[
-		     { "Sprache":"de",
-		       "Text":"*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten"
-		     }
-		  ]
+		  "Text":"*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten"
 		}
 	]
 }
