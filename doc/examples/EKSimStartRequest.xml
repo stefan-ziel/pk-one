@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EKSimStartRequest version="0.1">
+	<Version>0.1</Version>
 	<Sprache>de</Sprache>
 	<Penum>20597</Penum>
 	<Mitnum>10.00</Mitnum>

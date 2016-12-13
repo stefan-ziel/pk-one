@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EKSimExecuteResponse version="0.1">
+	<Version>0.1</Version>
 	<Sprache>de</Sprache>
 	<ProzessID>213414</ProzessID>
 	<Applikation>
-		<MaxEKS>305003.65</MaxEKS>
+		<EKS.max>305003.65</EKS.max>
 	</Applikation>
 	<Simulation>
 		<Wert Name="MaxEKSTar">408802.65</Wert>

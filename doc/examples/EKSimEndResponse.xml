@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EKSimEndResponse version="0.1">
+	<Version>0.1</Version>
 	<Sprache>de</Sprache>
 	<ProzessID>213414</ProzessID>
 	<Document>
