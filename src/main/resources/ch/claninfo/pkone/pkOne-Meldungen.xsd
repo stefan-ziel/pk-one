@@ -51,7 +51,7 @@
 					<xs:element name="Applikation" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element type="xs:decimal" name="EKS.max" minOccurs="0" maxOccurs="1">
+								<xs:element type="xs:decimal" name="MaxEKS" minOccurs="0" maxOccurs="1">
 									<xs:annotation>
 										<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
 									</xs:annotation>
@@ -141,7 +141,7 @@
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
 					<xs:sequence>
-						<xs:element type="xs:decimal" name="EKS">
+						<xs:element type="xs:decimal" name="SimEKS">
 							<xs:annotation>
 								<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
 							</xs:annotation>
