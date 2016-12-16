@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EKSimExecuteRequest version="0.1">
-	<Version>0.1</Version>
-	<Sprache>de</Sprache>
-	<ProzessID>213414</ProzessID>
-	<EKS>123456.95</EKS>
-</EKSimExecuteRequest>
+<EKSimExecuteRequest Version="0.1" Sprache="de" ProzessID="213414" EKS="123456.95"/>

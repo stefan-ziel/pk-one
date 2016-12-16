@@ -4,12 +4,10 @@
 		<xs:annotation>
 			<xs:documentation>Alle Meldungen enthalten zumindest die Version und die Sprache</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="Version" fixed="0.1"/>
-			<xs:element name="Sprache" type="xs:language"/>
-			<xs:element name="Tenant" type="xs:string"  minOccurs="0"/>
-			<xs:element name="Company" type="xs:string" minOccurs="0"/>
-		</xs:sequence>
+		<xs:attribute name="Version" fixed="0.1" use="required"/>
+		<xs:attribute name="Sprache" type="xs:language" use="required"/>
+		<xs:attribute name="Tenant" type="xs:string" use="optional"/>
+		<xs:attribute name="Company" type="xs:string" use="optional"/>
 	</xs:complexType>
 
 	<xs:complexType name="StartMessageType">
@@ -18,15 +16,13 @@
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
-				<xs:sequence>
-					<xs:element type="xs:string" name="Penum"/>
-					<xs:element type="xs:string" name="Mitnum"/>
-					<xs:element type="xs:dateTime" name="Valuta">
-						<xs:annotation>
-							<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
+				<xs:attribute type="xs:string" name="Penum" use="required"/>
+				<xs:attribute type="xs:string" name="Mitnum" use="required"/>
+				<xs:attribute type="xs:dateTime" name="Valuta" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -37,9 +33,7 @@
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
-				<xs:sequence>
-					<xs:element type="xs:string" name="ProzessID"/>
-				</xs:sequence>
+				<xs:attribute type="xs:string" name="ProzessID" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -50,35 +44,29 @@
 				<xs:sequence>
 					<xs:element name="Applikation" minOccurs="0">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element type="xs:decimal" name="EKS.max" minOccurs="0" maxOccurs="1">
-									<xs:annotation>
-										<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
-									</xs:annotation>
-								</xs:element>
-							</xs:sequence>
+							<xs:attribute type="xs:decimal" name="EKS.max" use="required">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 
 					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Name" type="xs:NMTOKEN"/>
-								<xs:element name="Wert">
-									<xs:simpleType>
-										<xs:union memberTypes="xs:decimal xs:dateTime"/>
-									</xs:simpleType>
-								</xs:element>
-							</xs:sequence>
+							<xs:attribute name="Name" type="xs:NMTOKEN" use="required"/>
+							<xs:attribute name="Wert">
+								<xs:simpleType>
+									<xs:union memberTypes="xs:decimal xs:dateTime"/>
+								</xs:simpleType>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
 
 					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Nummer" type="xs:integer"/>
-								<xs:element name="Text" type="xs:string"/>
-							</xs:sequence>
+							<xs:attribute name="Nummer" type="xs:integer" use="required"/>
+							<xs:attribute name="Text" type="xs:string" use="required"/>
 						</xs:complexType>
 					</xs:element>
 
@@ -96,12 +84,9 @@
 						<xs:annotation>
 							<xs:documentation>Das Dokument wird als Elementinhalt in BASE 6 to 4 Kodierung übergeben.</xs:documentation>
 						</xs:annotation>
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Name" type="xs:string"/>
-								<xs:element name="MimeType" type="xs:string"/>
-								<xs:element name="Content" type="xs:string"/>
-							</xs:sequence>
+						<xs:complexType mixed="true">
+							<xs:attribute name="Name" type="xs:string" use="optional"/>
+							<xs:attribute name="MimeType" type="xs:string" use="optional"/>
 						</xs:complexType>
 					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0"/>
@@ -112,10 +97,8 @@
 
 	<xs:element name="Fehler">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="Meldung" type="xs:string"/>
-				<xs:element name="Details" type="xs:string" minOccurs="0"/>
-			</xs:sequence>
+			<xs:attribute name="Meldung" type="xs:string" use="required"/>
+			<xs:attribute name="Details" type="xs:string" use="optional"/>
 		</xs:complexType>
 	</xs:element>
 
@@ -140,13 +123,11 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
-					<xs:sequence>
-						<xs:element type="xs:decimal" name="EKS">
-							<xs:annotation>
-								<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
-							</xs:annotation>
-						</xs:element>
-					</xs:sequence>
+					<xs:attribute type="xs:decimal" name="EKS">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>

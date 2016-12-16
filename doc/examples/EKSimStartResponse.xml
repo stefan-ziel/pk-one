@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EKSimStartResponse version="0.1">
-	<Version>0.1</Version>
-	<Sprache>de</Sprache>
-	<ProzessID>213414</ProzessID>
-	<Applikation>
-		<MaxEKS>305003.65</MaxEKS>
-	</Applikation>
-	<Simulation>
-		<Wert Name="MaxEKSTar">408802.65</Wert>
-		<Wert Name="Sparkap">103799.00</Wert>
-	</Simulation>
-	<Meldung Nummer="4711">
-		<Nummer>4711</Nummer>
-		<Text>*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten.</Text>
-	</Meldung>
+<EKSimStartResponse Version="0.1" Sprache="de" Tenant="clan" Company="BLP" ProzessID="213414">
+	<Applikation EKS.max="305003.65"/>
+	<Simulation Name="MaxEKSTar" Wert="408802.65"/>
+	<Simulation Name="Sparkap" Wert="103799.00"/>
+	<Meldung Nummer="4711" Text="*) Abweichungen aufgrund der definitiven Verzinsung des Sparkapitals bleiben ausdrücklich vorbehalten."/>
 </EKSimStartResponse>

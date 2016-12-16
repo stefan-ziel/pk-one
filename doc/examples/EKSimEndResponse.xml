@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EKSimEndResponse version="0.1">
-	<Version>0.1</Version>
-	<Sprache>de</Sprache>
-	<ProzessID>213414</ProzessID>
-	<Document>
-		<Name>VA-121.pdf</Name>
-		<MimeType>application/pdf</MimeType>
-		<Content>AFXM23-1=+21Fm!e... </Content>
-	</Document>
+<EKSimEndResponse Version="0.1" Sprache="de" ProzessID="213414">
+	<Document Name="VA-121.pdf" MimeType="application/pdf">AFXM23-1=+21Fm!e...</Document>
 </EKSimEndResponse>
