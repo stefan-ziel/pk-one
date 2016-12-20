@@ -15,4 +15,7 @@ public class JSONParseException extends Exception {
 		super("Error at (" + pLine + ',' + pColumn + "): " + pText); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
+	public JSONParseException(String pText, int pLine, int pColumn, Throwable pCause) {
+		super("Error at (" + pLine + ',' + pColumn + "): " + pText, pCause); //$NON-NLS-1$ //$NON-NLS-2$
+	}
 }

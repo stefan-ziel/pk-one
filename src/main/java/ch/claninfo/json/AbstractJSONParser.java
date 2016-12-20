@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
  */
 public abstract class AbstractJSONParser {
 
+	private static final String EOF = "<EOF>"; //$NON-NLS-1$
 	public static final DateFormat STD_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS"); //$NON-NLS-1$
 
 	int line;
@@ -42,14 +43,20 @@ public abstract class AbstractJSONParser {
 	protected abstract void name(String pName) throws JSONParseException;
 
 	protected void parse() throws JSONParseException, IOException {
-		while (true) {
-			char c = next();
-			if (c == '{') {
-				parseObject();
-				return;
-			} else if (!Character.isWhitespace(c)) {
+		char c = next();
+		while (c != '{') {
+			if (!Character.isWhitespace(c)) {
 				throw new InvalidCharException("{", c, line, col); //$NON-NLS-1$
 			}
+			c = next();
+		}
+		parseObject();
+		c = next();
+		while (c != 0) {
+			if (!Character.isWhitespace(c)) {
+				throw new InvalidCharException(EOF, c, line, col);
+			}
+			c = next();
 		}
 	}
 
@@ -306,7 +313,7 @@ public abstract class AbstractJSONParser {
 	static class InvalidCharException extends JSONParseException {
 
 		public InvalidCharException(String pExpected, char pActual, int pLine, int pColumn) {
-			super("Unexpected char '" + pActual + " expected one of the following: " + pExpected, pLine, pColumn); //$NON-NLS-1$ //$NON-NLS-2$
+			super("Unexpected char '" + (pActual == 0 ? EOF : Character.toString(pActual)) + "' expected one of the following: " + pExpected, pLine, pColumn); //$NON-NLS-1$ //$NON-NLS-2$	
 		}
 
 	}

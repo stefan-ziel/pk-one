@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -86,18 +87,24 @@ public class JSON2DOM extends AbstractJSONParser {
 
 	@Override
 	protected void startObject() throws JSONParseException {
-		Element obj = doc.createElementNS(NS, name);
-		if (curr == null) {
-			doc.appendChild(obj);
-		} else {
-			curr.appendChild(obj);
+		try {
+			Element obj = doc.createElementNS(NS, name);
+			if (curr == null) {
+				doc.appendChild(obj);
+			} else {
+				curr.appendChild(obj);
+			}
+			curr = obj;
 		}
-		curr = obj;
+		catch (DOMException e) {
+			throw new InvalidStructureException(curr == null ? doc : curr, name, line, col, e);
+		}
 	}
 
 	@Override
 	protected void value(Object pObject) throws JSONParseException {
 		if (pObject != null) {
+			try {
 			String value;
 			if (pObject instanceof Date) {
 				value = STD_DATE_FORMAT.format(pObject);
@@ -112,6 +119,18 @@ public class JSON2DOM extends AbstractJSONParser {
 			} else {
 				curr.setAttribute(name, value);
 			}
+			}
+			catch (DOMException e) {
+				throw new InvalidStructureException(curr == null ? doc : curr, name, line, col, e);
+			}
 		}
+	}
+
+	static class InvalidStructureException extends JSONParseException {
+
+		public InvalidStructureException(Node pParent, String pName, int pLine, int pColumn, DOMException pCause) {
+			super(pCause.getMessage() + " appending '" + pName + "' to '" + pParent.getNodeName() + '\'', pLine, pColumn, pCause); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
 	}
 }
