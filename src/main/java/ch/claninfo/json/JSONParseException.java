@@ -4,9 +4,6 @@ package ch.claninfo.json;
 
 public class JSONParseException extends Exception {
 
-	/**
-	 * @param pCause
-	 */
 	public JSONParseException(int pLine, int pColumn, Throwable pCause) {
 		super("Error at (" + pLine + ',' + pColumn + "): " + pCause.getMessage(), pCause);
 	}

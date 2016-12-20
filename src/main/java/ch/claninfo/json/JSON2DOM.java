@@ -105,20 +105,20 @@ public class JSON2DOM extends AbstractJSONParser {
 	protected void value(Object pObject) throws JSONParseException {
 		if (pObject != null) {
 			try {
-			String value;
-			if (pObject instanceof Date) {
-				value = STD_DATE_FORMAT.format(pObject);
-			} else {
-				value = pObject.toString();
-			}
+				String value;
+				if (pObject instanceof Date) {
+					value = STD_DATE_FORMAT.format(pObject);
+				} else {
+					value = pObject.toString();
+				}
 
-			if (curr.hasAttribute(name)) {
-				curr.setAttribute(name, curr.getAttribute(name) + ' ' + value);
-			} else if ("Content".equals(name)) { //$NON-NLS-1$
-				curr.appendChild(doc.createTextNode(value));
-			} else {
-				curr.setAttribute(name, value);
-			}
+				if (curr.hasAttribute(name)) {
+					curr.setAttribute(name, curr.getAttribute(name) + ' ' + value);
+				} else if ("Content".equals(name)) { //$NON-NLS-1$
+					curr.appendChild(doc.createTextNode(value));
+				} else {
+					curr.setAttribute(name, value);
+				}
 			}
 			catch (DOMException e) {
 				throw new InvalidStructureException(curr == null ? doc : curr, name, line, col, e);

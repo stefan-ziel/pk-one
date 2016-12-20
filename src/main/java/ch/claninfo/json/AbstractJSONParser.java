@@ -313,7 +313,7 @@ public abstract class AbstractJSONParser {
 	static class InvalidCharException extends JSONParseException {
 
 		public InvalidCharException(String pExpected, char pActual, int pLine, int pColumn) {
-			super("Unexpected char '" + (pActual == 0 ? EOF : Character.toString(pActual)) + "' expected one of the following: " + pExpected, pLine, pColumn); //$NON-NLS-1$ //$NON-NLS-2$	
+			super("Unexpected char '" + (pActual == 0 ? EOF : Character.toString(pActual)) + "' expected one of the following: " + pExpected, pLine, pColumn); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 	}
