@@ -44,9 +44,14 @@
 				<xs:sequence>
 					<xs:element name="Applikation" minOccurs="0">
 						<xs:complexType>
-							<xs:attribute type="xs:decimal" name="EKS.max" use="required">
+							<xs:attribute type="xs:decimal" name="EKS.max" use="optional">
 								<xs:annotation>
 									<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="EKS" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Aktuelle Einkaufssumme</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
 						</xs:complexType>
