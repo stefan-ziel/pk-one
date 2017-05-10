@@ -1,26 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen"
+	xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen"
+	elementFormDefault="qualified">
 	<xs:complexType name="MessageType">
 		<xs:annotation>
-			<xs:documentation>Alle Meldungen enthalten zumindest die Version und die Sprache</xs:documentation>
+			<xs:documentation>Alle Meldungen enthalten zumindest die Version und
+				die Sprache
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="Version" fixed="0.2" use="required"/>
-		<xs:attribute name="Sprache" type="xs:language" use="required"/>
-		<xs:attribute name="Tenant" type="xs:string" use="optional"/>
-		<xs:attribute name="Company" type="xs:string" use="optional"/>
+		<xs:attribute name="Version" fixed="0.2" use="required" />
+		<xs:attribute name="Sprache" type="xs:language" use="required" />
+		<xs:attribute name="Tenant" type="xs:string" use="optional" />
+		<xs:attribute name="Company" type="xs:string" use="optional" />
 	</xs:complexType>
 
 	<xs:complexType name="StartMessageType">
 		<xs:annotation>
-			<xs:documentation>Meldungen zum Starten eines Ablaufs</xs:documentation>
+			<xs:documentation>Meldungen zum Starten eines Ablaufs
+			</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
-				<xs:attribute type="xs:string" name="Penum" use="required"/>
-				<xs:attribute type="xs:string" name="Mitnum" use="required"/>
+				<xs:attribute type="xs:string" name="Penum" use="required" />
+				<xs:attribute type="xs:string" name="Mitnum" use="required" />
 				<xs:attribute type="xs:dateTime" name="Valuta" use="required">
 					<xs:annotation>
-						<xs:documentation xml:lang="de">Valutadatum / Berechnungsdatum</xs:documentation>
+						<xs:documentation xml:lang="de">Valutadatum /
+							Berechnungsdatum
+						</xs:documentation>
 					</xs:annotation>
 				</xs:attribute>
 			</xs:extension>
@@ -29,120 +37,123 @@
 
 	<xs:complexType name="WFMessageType">
 		<xs:annotation>
-			<xs:documentation>Meldungen zum weiterführen eines Ablaufes</xs:documentation>
+			<xs:documentation>Meldungen zum weiterführen eines Ablaufes
+			</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
-				<xs:attribute type="xs:string" name="ProzessID" use="required"/>
+				<xs:attribute type="xs:string" name="ProzessID" use="required" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 
-	
-	
+
+
 	<xs:simpleType name="SimParam">
-       <xs:restriction base="xs:string">
-          	<xs:enumeration value="PENUM"/>
-			<xs:enumeration value="GEBDAT"/>
-			<xs:enumeration value="JAHRMT"/>
-			<xs:enumeration value="ZIVCD"/>
-			<xs:enumeration value="SOVNR"/>
-			<xs:enumeration value="BEGRAD"/>
-			<xs:enumeration value="LOVS"/>
-			<xs:enumeration value="KOOAB"/>
-			<xs:enumeration value="REBASISRI"/>
-			<xs:enumeration value="BEISPARANBEISPARAGU"/>
-			<xs:enumeration value="PRZUBEIAN"/>
-			<xs:enumeration value="PRVWAN"/>
-			<xs:enumeration value="PRANTOT"/>
-			<xs:enumeration value="BEISPARAG"/>
-			<xs:enumeration value="PRZUBEIAG"/>
-			<xs:enumeration value="PRVWAG"/>
-			<xs:enumeration value="ABSAGTKTOGUVVP"/>
-			<xs:enumeration value="PRAGTOT"/>
-			<xs:enumeration value="KTOGUVVP"/>
-			<xs:enumeration value="BERDAT"/>
-			<xs:enumeration value="ABSAGT"/>
-			<xs:enumeration value="ZINFPROJ"/>
-			<xs:enumeration value="AGHKAP"/>
-			<xs:enumeration value="PENSDAT"/>
-			<xs:enumeration value="AGHKAP"/>
-			<xs:enumeration value="ALTRSPENSA"/>
-			<xs:enumeration value="REALTERPENSA"/>
-			<xs:enumeration value="FIX20"/>
-			<xs:enumeration value="REALTERKI"/>
-			<xs:enumeration value="AGHKAP64ORREKAPMAX"/>
-			<xs:enumeration value="OFFEN"/>
-			<xs:enumeration value="PENSDAT64"/>
-			<xs:enumeration value="AGHKAP64"/>
-			<xs:enumeration value="ALTRS64"/>
-			<xs:enumeration value="REALTER64"/>
-			<xs:enumeration value="PENSDAT62"/>
-			<xs:enumeration value="AGHKAP62"/>
-			<xs:enumeration value="ALTRS62"/>
-			<xs:enumeration value="REALTER62"/>
-			<xs:enumeration value="PENSDAT"/>
-			<xs:enumeration value="REIV"/>
-			<xs:enumeration value="REIVKI"/>
-			<xs:enumeration value="REWIT"/>
-			<xs:enumeration value="REWAI"/>
-			<xs:enumeration value="FZ15KRZFZLAG"/>
-			<xs:enumeration value="FZ17"/>
-			<xs:enumeration value="FZBVG"/>
-			<xs:enumeration value="FIBU_VALUTA"/>
-			<xs:enumeration value="FIBU_BEM"/>
-			<xs:enumeration value="IKONTOBETRAG"/>
-			<xs:enumeration value="BERDAT"/>
-			<xs:enumeration value="EKMAXEFF"/>
-			<xs:enumeration value="WEFMAXBET"/>
-			<xs:enumeration value="SPARKAPITAL"/>
-			<xs:enumeration value="MAXEKSUMME"/>
-			<xs:enumeration value="JAHRRENVEK"/>
-			<xs:enumeration value="REALTKRZ"/>
-			<xs:enumeration value="REIVKRZ"/>
-			<xs:enumeration value="REWITKRZ"/>
-			<xs:enumeration value="MITNAME"/>          	
-       </xs:restriction>
-    </xs:simpleType>
-	
-	
-	<xs:simpleType name="SimValue">
-		<xs:union memberTypes="xs:decimal xs:dateTime"/>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PENUM" />
+			<xs:enumeration value="GEBDAT" />
+			<xs:enumeration value="JAHRMT" />
+			<xs:enumeration value="ZIVCD" />
+			<xs:enumeration value="SOVNR" />
+			<xs:enumeration value="BEGRAD" />
+			<xs:enumeration value="LOVS" />
+			<xs:enumeration value="KOOAB" />
+			<xs:enumeration value="REBASISRI" />
+			<xs:enumeration value="BEISPARANBEISPARAGU" />
+			<xs:enumeration value="PRZUBEIAN" />
+			<xs:enumeration value="PRVWAN" />
+			<xs:enumeration value="PRANTOT" />
+			<xs:enumeration value="BEISPARAG" />
+			<xs:enumeration value="PRZUBEIAG" />
+			<xs:enumeration value="PRVWAG" />
+			<xs:enumeration value="ABSAGTKTOGUVVP" />
+			<xs:enumeration value="PRAGTOT" />
+			<xs:enumeration value="KTOGUVVP" />
+			<xs:enumeration value="BERDAT" />
+			<xs:enumeration value="ABSAGT" />
+			<xs:enumeration value="ZINFPROJ" />
+			<xs:enumeration value="AGHKAP" />
+			<xs:enumeration value="PENSDAT" />
+			<xs:enumeration value="AGHKAP" />
+			<xs:enumeration value="ALTRSPENSA" />
+			<xs:enumeration value="REALTERPENSA" />
+			<xs:enumeration value="FIX20" />
+			<xs:enumeration value="REALTERKI" />
+			<xs:enumeration value="AGHKAP64ORREKAPMAX" />
+			<xs:enumeration value="OFFEN" />
+			<xs:enumeration value="PENSDAT64" />
+			<xs:enumeration value="AGHKAP64" />
+			<xs:enumeration value="ALTRS64" />
+			<xs:enumeration value="REALTER64" />
+			<xs:enumeration value="PENSDAT62" />
+			<xs:enumeration value="AGHKAP62" />
+			<xs:enumeration value="ALTRS62" />
+			<xs:enumeration value="REALTER62" />
+			<xs:enumeration value="PENSDAT" />
+			<xs:enumeration value="REIV" />
+			<xs:enumeration value="REIVKI" />
+			<xs:enumeration value="REWIT" />
+			<xs:enumeration value="REWAI" />
+			<xs:enumeration value="FZ15KRZFZLAG" />
+			<xs:enumeration value="FZ17" />
+			<xs:enumeration value="FZBVG" />
+			<xs:enumeration value="FIBU_VALUTA" />
+			<xs:enumeration value="FIBU_BEM" />
+			<xs:enumeration value="IKONTOBETRAG" />
+			<xs:enumeration value="BERDAT" />
+			<xs:enumeration value="EKMAXEFF" />
+			<xs:enumeration value="WEFMAXBET" />
+			<xs:enumeration value="SPARKAPITAL" />
+			<xs:enumeration value="MAXEKSUMME" />
+			<xs:enumeration value="JAHRRENVEK" />
+			<xs:enumeration value="REALTKRZ" />
+			<xs:enumeration value="REIVKRZ" />
+			<xs:enumeration value="REWITKRZ" />
+			<xs:enumeration value="MITNAME" />
+		</xs:restriction>
 	</xs:simpleType>
-	
+
+
+	<xs:simpleType name="SimValue">
+		<xs:union memberTypes="xs:decimal xs:dateTime" />
+	</xs:simpleType>
+
 	<xs:complexType name="VAType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>	
+				<xs:sequence>
 					<xs:element name="Applikation" minOccurs="0">
 						<xs:complexType>
 							<xs:attribute type="xs:decimal" name="Weiter" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Weiter-Flag für Abschluss</xs:documentation>
+									<xs:documentation xml:lang="de">Weiter-Flag für
+										Abschluss
+									</xs:documentation>
 								</xs:annotation>
-							</xs:attribute>							
-						</xs:complexType>
-					</xs:element>			
-					<xs:element name = "Simulation" minOccurs="0" maxOccurs="unbounded">
-				       <xs:complexType>
-				          <xs:sequence>
-				             <xs:element name = "Name" type = "pko:SimParam" />
-				             <xs:element name = "Wert" type = "pko:SimValue" />
-				          </xs:sequence>
-				       </xs:complexType>
-				    </xs:element>									
-					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
-						<xs:complexType>
-							<xs:attribute name="Nummer" type="xs:integer" use="required"/>
-							<xs:attribute name="Text" type="xs:string" use="required"/>
+							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
-					<xs:element ref="pko:Fehler" minOccurs="0"/>
+					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Name" type="pko:SimParam" />
+								<xs:element name="Wert" type="pko:SimValue" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="Nummer" type="xs:integer" use="required" />
+							<xs:attribute name="Text" type="xs:string" use="required" />
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="EKType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
@@ -151,37 +162,41 @@
 						<xs:complexType>
 							<xs:attribute type="xs:decimal" name="EKS.max" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+									<xs:documentation xml:lang="de">Maximale
+										Einkaufssumme
+									</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
 							<xs:attribute type="xs:decimal" name="EKS" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Aktuelle Einkaufssumme</xs:documentation>
+									<xs:documentation xml:lang="de">Aktuelle
+										Einkaufssumme
+									</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
 						</xs:complexType>
 					</xs:element>
-								
-					<xs:element name = "Simulation" minOccurs="0" maxOccurs="unbounded">
-				       <xs:complexType>
-				          <xs:sequence>
-				             <xs:element name = "Name" type = "pko:SimParam" />
-				             <xs:element name = "Wert" type = "pko:SimValue" />
-				          </xs:sequence>
-				       </xs:complexType>
-				    </xs:element>									
-					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
+
+					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:attribute name="Nummer" type="xs:integer" use="required"/>
-							<xs:attribute name="Text" type="xs:string" use="required"/>
+							<xs:sequence>
+								<xs:element name="Name" type="pko:SimParam" />
+								<xs:element name="Wert" type="pko:SimValue" />
+							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
-					<xs:element ref="pko:Fehler" minOccurs="0"/>
+					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:attribute name="Nummer" type="xs:integer" use="required" />
+							<xs:attribute name="Text" type="xs:string" use="required" />
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<!-- obsolete -->
 	<xs:complexType name="AusweisType">
 		<xs:complexContent>
@@ -191,12 +206,16 @@
 						<xs:complexType>
 							<xs:attribute type="xs:decimal" name="EKS.max" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Maximale Einkaufssumme</xs:documentation>
+									<xs:documentation xml:lang="de">Maximale
+										Einkaufssumme
+									</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
 							<xs:attribute type="xs:decimal" name="EKS" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Aktuelle Einkaufssumme</xs:documentation>
+									<xs:documentation xml:lang="de">Aktuelle
+										Einkaufssumme
+									</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
 						</xs:complexType>
@@ -204,10 +223,10 @@
 
 					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:attribute name="Name" type="xs:NMTOKEN" use="required"/>
+							<xs:attribute name="Name" type="xs:NMTOKEN" use="required" />
 							<xs:attribute name="Wert">
 								<xs:simpleType>
-									<xs:union memberTypes="xs:decimal xs:dateTime"/>
+									<xs:union memberTypes="xs:decimal xs:dateTime" />
 								</xs:simpleType>
 							</xs:attribute>
 						</xs:complexType>
@@ -215,12 +234,12 @@
 
 					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:attribute name="Nummer" type="xs:integer" use="required"/>
-							<xs:attribute name="Text" type="xs:string" use="required"/>
+							<xs:attribute name="Nummer" type="xs:integer" use="required" />
+							<xs:attribute name="Text" type="xs:string" use="required" />
 						</xs:complexType>
 					</xs:element>
 
-					<xs:element ref="pko:Fehler" minOccurs="0"/>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -232,14 +251,16 @@
 				<xs:sequence>
 					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Das Dokument wird als Elementinhalt in BASE 6 to 4 Kodierung übergeben.</xs:documentation>
+							<xs:documentation>Das Dokument wird als Elementinhalt in BASE 6
+								to 4 Kodierung übergeben.
+							</xs:documentation>
 						</xs:annotation>
 						<xs:complexType mixed="true">
-							<xs:attribute name="Name" type="xs:string" use="optional"/>
-							<xs:attribute name="MimeType" type="xs:string" use="optional"/>
+							<xs:attribute name="Name" type="xs:string" use="optional" />
+							<xs:attribute name="MimeType" type="xs:string" use="optional" />
 						</xs:complexType>
 					</xs:element>
-					<xs:element ref="pko:Fehler" minOccurs="0"/>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -247,14 +268,14 @@
 
 	<xs:element name="Fehler">
 		<xs:complexType>
-			<xs:attribute name="Meldung" type="xs:string" use="required"/>
-			<xs:attribute name="Details" type="xs:string" use="optional"/>
+			<xs:attribute name="Meldung" type="xs:string" use="required" />
+			<xs:attribute name="Details" type="xs:string" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
 	<!-- Requests und Responses -->
-	
-	
+
+
 	<xs:element name="EKSimStartRequest" type="pko:StartMessageType">
 		<xs:annotation>
 			<xs:documentation>Start einer Einkaufssimulation</xs:documentation>
@@ -263,7 +284,9 @@
 
 	<xs:element name="EKSimStartResponse" type="pko:EKType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor Einkauf zurück die in Portal STEP 3 angezeigt werden sollen</xs:documentation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
+				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
@@ -276,7 +299,9 @@
 				<xs:extension base="pko:WFMessageType">
 					<xs:attribute type="xs:decimal" name="EKS">
 						<xs:annotation>
-							<xs:documentation xml:lang="de">Simulativer Einkaufsbetrag</xs:documentation>
+							<xs:documentation xml:lang="de">Simulativer
+								Einkaufsbetrag
+							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 				</xs:extension>
@@ -286,7 +311,9 @@
 
 	<xs:element name="EKSimExecuteResponse" type="pko:EKType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach Einkauf zurück die in Portal STEP 3 angezeigt werden sollen</xs:documentation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
+				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
@@ -298,12 +325,11 @@
 
 	<xs:element name="EKSimEndResponse" type="pko:DocumentType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format</xs:documentation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	
-	
-	
+
 	<!-- SIM VA 1 Stepper -->
 	<xs:element name="VASimStartRequest" type="pko:StartMessageType">
 		<xs:annotation>
@@ -311,25 +337,39 @@
 		</xs:annotation>
 	</xs:element>
 
-	<xs:element name="VASimStartResponse" type="pko:VAType">	
+	<xs:element name="VASimStartResponse" type="pko:VAType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte zurück </xs:documentation>
-		</xs:annotation>		
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
+				zurück
+			</xs:documentation>
+		</xs:annotation>
 	</xs:element>
-	
 
-	<xs:element name="VASimExecuteRequest" >
+	<xs:element name="VASimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe des Flags Weiter, mit 1 wird der WF abgeschlossen und das Dokument bezogen</xs:documentation>
+			<xs:documentation>Übergabe des Flags Weiter, mit 1 wird der WF
+				abgeschlossen und das Dokument bezogen
+			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
-					<xs:attribute type="xs:decimal" name="Weiter" required="true">
+				   <xs:attribute type="xs:decimal" name="EndSimulation"
+						use="required">
 						<xs:annotation>
-							<xs:documentation xml:lang="de"></xs:documentation>
+							<xs:documentation xml:lang="de">Immer 1 im Executerequest
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>				
+					<xs:attribute type="xs:dateTime" name="Valutaneu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
+					<!-- <xs:attribute type="xs:decimal" name="Weiter" use="required"> <xs:annotation> 
+						<xs:documentation xml:lang="de"></xs:documentation> </xs:annotation> </xs:attribute> -->
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -337,9 +377,36 @@
 
 	<xs:element name="VASimExecuteResponse" type="pko:DocumentType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format</xs:documentation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	
-	
+
+	<xs:element name="VASimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der VA Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation"
+						use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>					
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="VASimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
 </xs:schema>
