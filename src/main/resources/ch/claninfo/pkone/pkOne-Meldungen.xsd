@@ -112,7 +112,8 @@
 			<xs:enumeration value="REWITKRZ" />
 			<xs:enumeration value="MITNAME" />
 			<xs:enumeration value="WSHANDEL1" />
-			<xs:enumeration value="WSHANDEL2" />			
+			<xs:enumeration value="WSHANDEL2" />	
+			<xs:enumeration value="ALTRENORD" />		
 		</xs:restriction>
 	</xs:simpleType>
 
