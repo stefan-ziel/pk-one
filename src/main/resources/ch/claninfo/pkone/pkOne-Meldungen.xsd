@@ -364,7 +364,7 @@
 							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>				
-					<xs:attribute type="xs:dateTime" name="Valutaneu" use="required">
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Valutadatum /
 								Berechnungsdatum
