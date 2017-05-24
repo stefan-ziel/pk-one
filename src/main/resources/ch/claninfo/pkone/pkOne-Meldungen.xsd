@@ -112,8 +112,16 @@
 			<xs:enumeration value="REWITKRZ" />
 			<xs:enumeration value="MITNAME" />
 			<xs:enumeration value="WSHANDEL1" />
-			<xs:enumeration value="WSHANDEL2" />	
-			<xs:enumeration value="ALTRENORD" />		
+			<xs:enumeration value="WSHANDEL2" />
+			<xs:enumeration value="ALTRENORD" />
+			<xs:enumeration value="EndkapitalNach" />
+			<xs:enumeration value="EndkapitalVor" />
+			<xs:enumeration value="UmwandlungssatzNach" />
+			<xs:enumeration value="UmwandlungssatzVor" />
+			<xs:enumeration value="AltersrenteNach" />
+			<xs:enumeration value="AltersrenteVor" />
+			<xs:enumeration value="AltersrenteNachProz" />
+			<xs:enumeration value="AltersrenteVorProz" />
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -130,8 +138,8 @@
 						<xs:complexType>
 							<xs:attribute type="xs:decimal" name="Weiter" use="optional">
 								<xs:annotation>
-									<xs:documentation xml:lang="de">Weiter-Flag für
-										Abschluss
+									<xs:documentation xml:lang="de">
+										Weiter-Flag für Abschluss
 									</xs:documentation>
 								</xs:annotation>
 							</xs:attribute>
@@ -199,63 +207,38 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-
-	<!-- obsolete -->
-	<xs:complexType name="AusweisType">
+	
+	<xs:complexType name="REType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
 				<xs:sequence>
-					<xs:element name="Applikation" minOccurs="0">
-						<xs:complexType>
-							<xs:attribute type="xs:decimal" name="EKS.max" use="optional">
-								<xs:annotation>
-									<xs:documentation xml:lang="de">Maximale
-										Einkaufssumme
-									</xs:documentation>
-								</xs:annotation>
-							</xs:attribute>
-							<xs:attribute type="xs:decimal" name="EKS" use="optional">
-								<xs:annotation>
-									<xs:documentation xml:lang="de">Aktuelle
-										Einkaufssumme
-									</xs:documentation>
-								</xs:annotation>
-							</xs:attribute>
-						</xs:complexType>
-					</xs:element>
-
 					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:attribute name="Name" type="xs:NMTOKEN" use="required" />
-							<xs:attribute name="Wert">
-								<xs:simpleType>
-									<xs:union memberTypes="xs:decimal xs:dateTime" />
-								</xs:simpleType>
-							</xs:attribute>
+							<xs:attribute name="Name" type="pko:SimParam" />
+							<xs:attribute name="Wert" type="pko:SimValue" />
 						</xs:complexType>
 					</xs:element>
-
 					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:attribute name="Nummer" type="xs:integer" use="required" />
 							<xs:attribute name="Text" type="xs:string" use="required" />
 						</xs:complexType>
 					</xs:element>
-
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<!-- obsolete -->
+
 	<xs:complexType name="DocumentType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
 				<xs:sequence>
 					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Das Dokument wird als Elementinhalt in BASE 6
-								to 4 Kodierung übergeben.
+							<xs:documentation>
+								Das Dokument wird als Elementinhalt in 
+								BASE 6 to 4 Kodierung übergeben.
 							</xs:documentation>
 						</xs:annotation>
 						<xs:complexType mixed="true">
@@ -408,6 +391,44 @@
 	<xs:element name="VASimEndResponse" type="pko:DocumentType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+		<!-- SIM RE 1 Stepper -->
+	<xs:element name="RESimStartRequest">
+		<xs:annotation>
+			<xs:documentation>Eine Rentensimulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:MessageType">
+					<xs:attribute type="xs:string" name="Mitnum" use="required" />
+					<xs:attribute type="xs:dateTime" name="Geburtsdatum" use="required"/>
+					<xs:attribute name="Sparplan" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Standard"/>
+								<xs:enumeration value="Plus"/>
+								<xs:enumeration value="Minus"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="Stichtag" use="required"/>
+					<xs:attribute type="xs:double" name="Jahreslohn" use="required"/>
+					<xs:attribute type="xs:double" name="Sparkapital" use="required"/>
+					<xs:attribute type="xs:dateTime" name="PensDatVor" use="required"/>
+					<xs:attribute type="xs:dateTime" name="PensDatNach" use="required"/>
+					<xs:attribute type="xs:double" name="Projektionszinssatz" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RESimStartResponse" type="pko:REType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
+				zurück
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
