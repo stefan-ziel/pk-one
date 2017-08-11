@@ -35,6 +35,18 @@
 		</xs:complexContent>
 	</xs:complexType>
 
+	<xs:complexType name="StartMessageOBType">
+		<xs:annotation>
+			<xs:documentation>Meldungen zum Starten eines Ablaufs
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:MessageType">
+				<xs:attribute type="xs:string" name="Penum" use="required" />				
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
 	<xs:complexType name="WFMessageType">
 		<xs:annotation>
 			<xs:documentation>Meldungen zum weiterführen eines Ablaufes
@@ -130,6 +142,62 @@
 		<xs:union memberTypes="xs:decimal xs:dateTime" />
 	</xs:simpleType>
 
+	<xs:simpleType name="RowValue">
+		<xs:union memberTypes="xs:string xs:decimal xs:dateTime" />
+	</xs:simpleType>
+	
+	<xs:complexType name="OBType">
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>					
+					<xs:element name="Vers" maxOccurs="unbounded" minOccurs="0">
+			          <xs:complexType>
+			            <xs:sequence>
+			              <xs:element type="pko:RowValue" name="Name"/>
+			              <xs:element type="pko:RowValue" name="Vname"/>
+			              <xs:element type="pko:RowValue" name="Sexcd"/>
+			              <xs:element type="pko:RowValue" name="Sprcd"/>
+			              <xs:element type="pko:RowValue" name="Gebdat"/>
+			              <xs:element type="pko:RowValue" name="Toddat"/>
+			              <xs:element type="pko:RowValue" name="Ahvnr"/>
+			              <xs:element type="pko:RowValue" name="Sovnr"/>
+			              <xs:element type="pko:RowValue" name="Penum2"/>
+			              <xs:element type="pko:RowValue" name="Zivcd"/>
+			              <xs:element type="pko:RowValue" name="Qstpfl"/>
+			              <xs:element type="pko:RowValue" name="Niederlb"/>
+			              <xs:element type="pko:RowValue" name="Mitnum"/>
+			              <xs:element type="pko:RowValue" name="Mitbez"/>
+			              <xs:element type="pko:RowValue" name="Mitname"/>
+			              <xs:element type="pko:RowValue" name="Ankdat"/>
+			              <xs:element type="pko:RowValue" name="Einfid"/>
+			              <xs:element type="pko:RowValue" name="Einvod"/>
+			              <xs:element type="pko:RowValue" name="PARA1"/>
+			              <xs:element type="pko:RowValue" name="Ausfid"/>
+			              <xs:element type="pko:RowValue" name="Ausvod"/>
+			              <xs:element type="pko:RowValue" name="Ausgrund"/>
+			              <xs:element type="pko:RowValue" name="Vspendenz"/>
+			              <xs:element type="pko:RowValue" name="Vsaktiv"/>
+			              <xs:element type="pko:RowValue" name="Anrk"/>           
+			              <xs:element type="pko:RowValue" name="Anrl"/>
+			              <xs:element type="pko:RowValue" name="Adresse1"/>
+			              <xs:element type="pko:RowValue" name="Adresse2"/>
+			              <xs:element type="pko:RowValue" name="Adresse3"/>
+			              <xs:element type="pko:RowValue" name="Adresse4"/>
+			              <xs:element type="pko:RowValue" name="Ort"/>
+			              <xs:element type="pko:RowValue" name="Plz"/>
+			              <xs:element type="pko:RowValue" name="Plzzus"/>
+			              <xs:element type="pko:RowValue" name="Landcd"/>
+			              <xs:element type="pko:RowValue" name="Land"/>
+			            </xs:sequence>
+			          </xs:complexType>
+			        </xs:element>	
+					<xs:element ref="pko:Fehler" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
 	<xs:complexType name="VAType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
@@ -433,4 +501,16 @@
 		</xs:annotation>
 	</xs:element>
 
+        <xs:element name="OnBoardingStartRequest" type="StartMessageOBType">
+		<xs:annotation>
+			<xs:documentation>Start des OnBoarding Prozesses</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="OnBoardingStartResponse" type="pko:OBType">
+		<xs:annotation>
+			<xs:documentation>Ende und Antwort des OnBoarding Prozesses
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 </xs:schema>
