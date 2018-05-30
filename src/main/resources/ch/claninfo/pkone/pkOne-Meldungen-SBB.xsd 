@@ -1,0 +1,2134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+			<p>
+				Dieses Schema beschreibt die Meldungen die zwischen dem PKONE-Portal und PVCLAN ausgetauscht werden um
+				Simulationen durchzuführen. Die Meldungen gehochen folgenden Namenskonventionen
+			</p>
+			<ul>
+				<li>Anfragen von PKONE an PVCLAN enden mit "Request"</li>
+				<li>Die synchron dazu erfolgenden Antorten von PVCLAN enden mit "Response"</li>
+				<li>
+					Eine Simulation besteht aus drei Paaren von Meldung und Antwort
+					<ul>
+						<li>Initialisieren der Simulation mit Infix "Start".</li>
+						<li>Durchführen der Simulation mit Infix "Execute". Dieser Schritt darf beliebig ewiederholt werden.</li>
+						<li>Beenden der Simulation mit Infix "Execute".</li>
+					</ul>
+				</li>
+			</ul>
+			Alle Meldungen enthalten eine Versionsnummer so dass beide Seiten die korrekte Version dieser
+			Spezifikation prüfen können. Es existiert ein
+			<a hef="https://github.com/stefan-ziel/pk-one">frei zugänglicher Validator</a>
+			der ein beliebiges Protokollelement auf seine Konformität zu diesem Schema überprüft.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="MessageType">
+		<xs:annotation>
+			<xs:documentation>
+				Grundlegender Meldungstyp dessen Attribute von allen Anfrage un Antworten untersützt werden
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Version" fixed="0.2" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Versionsnummer des Protokolls. Stimmt diese zwischen PKONE und PVCLAN nicht überein wird die Verarbeitung abgebrochen.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Sprache" type="xs:language" use="required">
+			<xs:annotation>
+				<xs:documentation>
+					Sprache der Meldung nach ISO 639
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Tenant" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Kürzel des PVCLAN-Instanz bei Einsatz in der Cloud.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Company" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>
+					Kürzel der Firma innerhalb einer PVCLAN-Instanz.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="StartMessageType">
+		<xs:annotation>
+			<xs:documentation>
+				Meldungen zum Starten eines Ablaufs
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:MessageType">
+				<xs:attribute type="xs:string" name="Penum" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Personalnummer des Versicherten
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute type="xs:string" name="Mitnum" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Mandantennummer des Versicherten
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute type="xs:dateTime" name="Valuta" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Valutadatum / Berechnungsdatum
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="WFMessageType">
+		<xs:annotation>
+			<xs:documentation>
+				Meldungen zum Weiterführen eines Ablaufes
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:MessageType">
+				<xs:attribute type="xs:string" name="ProzessID" use="required">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Eindeutige Prozessnummer die diesen Ablauf identifiziert.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+
+
+	<xs:simpleType name="SimParam">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PENUM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Personalnummer des Versicherten
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GEBDAT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Geburtsdatum des Versicherten
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGHTOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Altersguthaben Stand 31.12. Vorvorjahr
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGKTOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Kürzung AGH Total Summe
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="AGSTOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Altersgutschriften Total Summe Vorjahr
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTAHVDAT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Alter AHV
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTERANZM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Alter MT des Versicherten akt. Jahr
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTERDEZ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Alter des Versicherten in Dezimalen
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTERMONJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Alter Jahre Berdat
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTGUSIM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Altersguthaben Total für Simulation (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ALTGUTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Altersguthaben Total Aktuell (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APENM58M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 58 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APENM60M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 60 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APENM62M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 62 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APENM65M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 65 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN58M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 58 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN58MOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 58 (SimBP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN58UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 58 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN59M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 59 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN59UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 59 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN60M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 60 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN60MOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 60 (SimBP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN60UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 60 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN61M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 61 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN61UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 61 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN62M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 62 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN62MOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 62 (SimBP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN62UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 62 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN63M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 63 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN63UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 63 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN64M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 64 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN64UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 64 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN65M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 65 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN65MOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatl Alterspens im Alter 65 (SimBP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="APEN65UW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungsatz im Alter 65 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BERDAT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Aktuelles Berechnungsdatum
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BERDAT1">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Aktuelles Berechnungsdatum + 1 Tag
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BGUP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Massgebender BG für Üpensanspruch BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLOHNB">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Beitragspflichtiger Lohn BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLOHNE">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Beitragspflichtiger Lohn für Einkauf BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLOHNR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Beitragspflichtiger Lohn für Risiko BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BVGTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Freizügigkeit gemäss BVG aktuell
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EFFPEN">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Effektive Pension nach Check 105% </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EHGPM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche Ehegattenpension (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EHGPMOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche Ehegattenpension (Sim BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EILTOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Einlagen Total Summe ohne Zins
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKOFF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						EKS Offertbetrag (Sim BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKSUEPMAX">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Maximalbetrag UEPENS in CHF f. Off. (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKUP60">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Mögl Einkauf Uepens Alter 60 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKUP61">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Mögl Einkauf Uepens Alter 61 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKUP62">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Mögl Einkauf Uepens Alter 62 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKUP63">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Mögl Einkauf Uepens Alter 63 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="EKUP64">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Mögl Einkauf Uepens Alter 64 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FZTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Massgebende Austrittsleistung (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FZ17TOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Total Mindestbetrag Art 17 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IVPM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche IV Rente (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="IVPMOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche IV Rente (Sim Offerte BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KAPBEZ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Gewünschter Kapitalbezug
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIPM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche Kinderpension (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KIPMOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Monatliche Kinderpension (Sim Off BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="KTOWEF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Total WEF Vorbezug (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAXEKS">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Maximal mögliche Einkaufssumme (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAXKAPBEZ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Maximaler Kapitalbezug Total
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAXUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Maximalbetrag UEPENS in CHF (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAXUEPBG">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						ÜPens mit BGUP akt
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MAXVAR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Maximalbetrag VAR in CHF (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMPRIORAP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Anspruch Priora per Berechnungsdatum
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MMSFRW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Merkmal Sparbeiträge Freiwllig (2%)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORDUW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umwandlungssatz ordentl Pens (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PALTGUSIM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Altersguthaben Total für Sim Pens (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PENBERDATKB">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Pension nach KB AGH
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PENBERDKBV">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Pension nach KB VAR
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PENUPZU">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Zusatzpension ÜP + VAR Überschuss
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM58">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 58 (BP) Modell
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM58OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 58 Offerte Modell
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM59">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 59 (BP) Modell
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM59OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 59 Offerte Modell
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM60">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 60 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM60OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 60 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM61">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 61 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM61OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 61 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM62">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 62 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM62OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 62 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM63">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 63 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM63OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 63 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM64">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 64 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM64OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 64 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM65">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 65 (BP) Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGHM65OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 65 Offerte Model
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH58">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 58 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH58OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 58 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH59">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 59 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH59OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 59 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH60">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 60 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH60OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 60 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH61">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 61 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH61OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 61 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH62">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 62 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH62OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 62 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH63">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 63 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH63OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 63 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH64">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 64 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH64OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 64 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH65">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 65 (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH65OF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Projeziertes AGH Alter 65 Offerte
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PRAGH65P">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Rente Passiv 65 Jahre
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RATEOFF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						EKS Rate für Offerte (Sim BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RATETOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Total Rate pro Monat
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISAAG">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risikobeitragssatz AG BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISAANR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risikobeitragssatz AN BP für Report
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISAGM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risiko Monatsbeitrag AG BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISANM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risiko Monatsbeitrag AN BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISAUU">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risikobeitragssatz AN BP bei unb. Urlaub
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RISUUM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Risiko Monatsbeitrag AN bei UBU BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="RUECKZUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Rückzahlung UEP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANAGM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						San. Monatsbeitrag AG BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANANM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						San. Monatsbeitrag AN BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANSAANR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sanierungsbeitragssatz AN BP für Report
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANSAGEFF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sanierungsbeitragssatz AG BP effektiv
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANSAUU">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sanierungsbeitragssatz AN BP bei UU
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SANUUM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						San. Monatsbeitrag AN bei UBU BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARAGM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitrag Monatlich AG Beitragsprimat
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARANM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitrag AN Beitragsprimat Monatlich
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARFREIWM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeiträge Monatlich Freiwillig (2%)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARFRWMM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeiträge Freiw Mitgl monatlich
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARSAAG">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitragssatz AG BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARSAANR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitragssatz AN BP für Report
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARSAFRW">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitragssatz Freiwillig (2%)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARSAUU">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeitragssatz AN BP bei unb. Urlaub
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPARUUM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Sparbeiträge Monatlich bei unb. Urlaub
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPERRTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Total Saldo Sperrkonto
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TFK">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Einmaliges Todesfallkapital (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TFKOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Einmaliges Todesfallkapital (Sim Off BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UBERUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Ueberschuss UEP Berdat
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UBERVAR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Ueberschuss VAR Berdat
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPENOFF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Tot Üpensbetrag für Offerte (Sim BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPENSIM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Kto Upens Total für Simulation (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPENSTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Höherer Betrag Upenskto 17 od AGH
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPVOFIJJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Üpens Vorfinanziert auf Alter (JJ) BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPVOFIJJOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Üpens Vorfin auf Alter (JJ) BP Sim
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPVOFIMM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Üpens Vorfinanziert auf Alter (MM) BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPVOFIMMOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Üpens Vorfin auf Alter (MM) BP Sim
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UPVOFISA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Üpens Vorfinanziert % </xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP58M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 58 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP58SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 58 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP58SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 58 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP59M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 59 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP59SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 59 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP59SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 59 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP60M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 60 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP60SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 60 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP60SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 60 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP61M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 61 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP61SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 61 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP61SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 61 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP62M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 62 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP62SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 62 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP62SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 62 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP63M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 63 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP63SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 63 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP63SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 63 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP64M">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Max Uepens Monatl Alter 64 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP64SA">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfinanzierte Uepens im Alter 64 BP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UP64SAOF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Vorfin Uepens im Alter 64 BP für (Sim)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USAGHUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss UEP in AGH
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USAGHVAR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss VAR in AGH
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USRESTUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss UEP Rest
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USRESTVAR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss VAR Rest
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USUEPDEF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss UEP definitiv
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USUEPVAR">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss VAR in UEP
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USVARDEF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss VAR definitiv
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USVARUEP">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Umb Ueberschuss UEP in VAR
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAROFF">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						VAR Offertbetrag (Sim BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VARSIM">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Kto VAR Total für Simulation (BP)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VARTOT">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Höherer Betrag Kto VAR 17 od AGH
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZITOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Zins Total Summe Vorjahr
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ZUWTOTVJ">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Zuwendung Total Summe
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="SimValue">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Berechnungeergebnisse sind entweder Zahlen oder Datumswerte
+			</xs:documentation>
+		</xs:annotation>
+		<xs:union memberTypes="xs:decimal xs:dateTime" />
+	</xs:simpleType>
+
+	<xs:element name="Simulation">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Ein Key-Value-Paar aus der Berechung der Simulation
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Name" type="pko:SimParam">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Name des Wertes
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Wert" type="pko:SimValue">
+					<xs:annotation>
+						<xs:documentation xml:lang="de">
+							Berechneter Wert
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Meldung">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Informierende oder warnende Meldungen aus PVCLAN. Berechnug wurde durchgeführt.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Nummer" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Meldungsnummer
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Text" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Meldungstext in der angegebenen Sprache
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="Fehler">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Fehlermeldungen aus PVCLAN. Berechnug wurde nicht durchgeführt.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="Meldung" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Meldungstext in der angegebenen Sprache
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="Details" type="xs:string" use="optional">
+				<xs:annotation>
+					<xs:documentation xml:lang="de">
+						Weiterführende Informationen zu diesem Fehler
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="ExecuteResponseType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Normale Antwort auf eine "Execute"-Meldung
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element ref="pko:Simulation" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Meldung" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="EINType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Antwort bei Einlagensimulation
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:ExecuteResponseType">
+				<xs:sequence>
+					<xs:element name="Applikation" minOccurs="0">
+						<xs:complexType>
+							<xs:attribute type="xs:decimal" name="EKOFF.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale EKOFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="EKOFF.min" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Minimale EKOFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="VAROFF.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale VAROFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="VAROFF.min" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Minimale VAROFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="UPENOFF.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale UPENOFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="UPENOFF.min" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Minimale UPENOFFsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="KPType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Antwort bei Kapitalbezugsimulation
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:ExecuteResponseType">
+				<xs:sequence>
+					<xs:element name="Applikation" minOccurs="0">
+						<xs:complexType>
+							<xs:attribute type="xs:decimal" name="KPS.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale KPsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="KPS.min" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Aktuelle KPsumme</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="WEFType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				Antwort bei Kapitalbezugsimulation
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element name="Applikation" minOccurs="0">
+						<xs:complexType>
+							<xs:attribute type="xs:decimal" name="WEF.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale
+										WEFsumme
+									</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="WEF.min" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Aktuelle
+										WEFsumme
+									</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="pko:Simulation" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Meldung" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="EKType">
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element name="Applikation" minOccurs="0">
+						<xs:complexType>
+							<xs:attribute type="xs:decimal" name="EKS.max" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Maximale
+										Einkaufssumme
+									</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute type="xs:decimal" name="EKS" use="optional">
+								<xs:annotation>
+									<xs:documentation xml:lang="de">Aktuelle
+										Einkaufssumme
+									</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="pko:Simulation" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Meldung" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="DocumentType">
+		<xs:complexContent>
+			<xs:extension base="pko:WFMessageType">
+				<xs:sequence>
+					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>
+								Das Dokument wird als Elementinhalt in
+								BASE 6 to 4 Kodierung übergeben.
+							</xs:documentation>
+						</xs:annotation>
+						<xs:complexType mixed="true">
+							<xs:attribute name="Name" type="xs:string" use="optional" />
+							<xs:attribute name="MimeType" type="xs:string" use="optional" />
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="pko:Fehler" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- Requests und Responses -->
+
+
+	<xs:element name="EKSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer Einkaufssimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EKSimStartResponse" type="pko:EKType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
+				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EKSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe des Einkaufsbetrags</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EKS" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Simulativer
+								Einkaufsbetrag
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EKSimExecuteResponse" type="pko:EKType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
+				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EKSimEndRequest" type="pko:WFMessageType">
+		<xs:annotation>
+			<xs:documentation>Beenden der Einkaufssimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EKSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- WEF 2 Stepper -->
+	<xs:element name="WEFSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer WEFsimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="WEFSimStartResponse" type="pko:WEFType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
+				WEF zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="WEFSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe des WEF-Betrags</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="WEF" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Simulativer
+								WEFbetrag
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="WEFSimExecuteResponse" type="pko:WEFType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
+				WEF zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="WEFSimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der WEF Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="WEFSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die WEFDokumente in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+
+	<!-- SIM VA 1 Stepper -->
+	<xs:element name="VASimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start eines VA</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="VASimStartResponse" type="pko:ExecuteResponseType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
+				zurück
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="VASimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe des Flags Weiter, mit 1 wird der WF
+				abgeschlossen und das Dokument bezogen
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Immer 1 im Executerequest
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="VASimExecuteResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="VASimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der VA Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="VASimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommt ein VA in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- SIM RE 1 Stepper -->
+	<xs:element name="RESimStartRequest">
+		<xs:annotation>
+			<xs:documentation>Eine Rentensimulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:MessageType">
+					<xs:attribute type="xs:string" name="Mitnum" use="required" />
+					<xs:attribute type="xs:dateTime" name="Geburtsdatum" use="required" />
+					<xs:attribute name="Sparplan" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="Standard" />
+								<xs:enumeration value="Plus" />
+								<xs:enumeration value="Minus" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="Stichtag" use="required" />
+					<xs:attribute type="xs:double" name="Jahreslohn" use="required" />
+					<xs:attribute type="xs:double" name="Sparkapital" use="required" />
+					<xs:attribute type="xs:dateTime" name="PensDatVor" use="required" />
+					<xs:attribute type="xs:dateTime" name="PensDatNach" use="required" />
+					<xs:attribute type="xs:double" name="Projektionszinssatz" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="RESimStartResponse" type="pko:ExecuteResponseType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
+				zurück
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- 2 Stepper Einlage -->
+	<xs:element name="EINSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer Einlagensimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EINSimStartResponse" type="pko:EINType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
+				Einlage zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EINSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe der Einlagenwerte</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Immer 1 im Executerequest
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="EKOFF" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Altersguthaben
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="RATEOFF" use="optional">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Altersguthaben monatlich
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="VAROFF" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Konto vorzeitiger Altersrücktritt
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="UPENOFF" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Konto Überbrückungspension
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EINSimExecuteResponse" type="pko:EINType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
+				Einlagen zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="EINSimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der Einlagen Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="EINSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Einlagendokumente in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- freiwilliger Sparbeitrag 2 Stepper -->
+	<xs:element name="FRSSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer Einlagensimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FRSSimStartResponse" type="pko:ExecuteResponseType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für den freiwilligen Sparbeitrag
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FRSSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe der Werte für den freiwilligen Sparbeitrag</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Immer 1 im Executerequest
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="PJN" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Ja Nein
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FRSSimExecuteResponse" type="pko:ExecuteResponseType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für den freiwilligen Sparbeitrag
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FRSSimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der FRS Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FRSSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Sparbeitragdokumente in PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- Kapitalbezug -->
+	<xs:element name="KPSimStartRequest" type="pko:StartMessageType">
+		<xs:annotation>
+			<xs:documentation>Start einer Kapitalbezugsimulation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="KPSimStartResponse" type="pko:KPType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
+				dem Kapitalbezug zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="KPSimExecuteRequest">
+		<xs:annotation>
+			<xs:documentation>Übergabe des Kapitlabezugbetrags</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:decimal" name="KPS" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Simulativer
+								Einlagebetrag
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Valutadatum /
+								Berechnungsdatum
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="KPSimExecuteResponse" type="pko:KPType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für die Einlage
+				zurück die in Portal STEP 3 angezeigt werden sollen
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="KPSimEndRequest">
+		<xs:annotation>
+			<xs:documentation>Beenden der Altersleistungen Simulation</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
+						<xs:annotation>
+							<xs:documentation xml:lang="de">Indikator, dass
+								Simulation beendet werden soll, immer 2 im EndRequest!
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="KPSimEndResponse" type="pko:DocumentType">
+		<xs:annotation>
+			<xs:documentation>In dieser Antwort kommt ein PDF-Format
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>
