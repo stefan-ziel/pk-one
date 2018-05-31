@@ -126,7 +126,7 @@
 
 	<xs:simpleType name="vstyp">
 		<xs:annotation>
-			<xs:documentation>Typ einer Versicherten Person (Aktiver oder Rentner)</xs:documentation>
+			<xs:documentation>Typ einer Versicherten Person</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="VS">
@@ -183,7 +183,7 @@
 
 	<xs:simpleType name="ISO3166CountyCode">
 		<xs:annotation>
-			<xs:documentation>Alle zulässigne ländercodes nach ISO-3166</xs:documentation>
+			<xs:documentation>Alle zulässige Ländercodes nach ISO-3166</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="AF">
@@ -418,7 +418,7 @@
 			</xs:enumeration>
 			<xs:enumeration value="CC">
 				<xs:annotation>
-					<xs:documentation>COCOS (KEELING) ISLANDS</xs:documentation>
+					<xs:documentation>COCOS ISLANDS</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="CO">
@@ -533,7 +533,7 @@
 			</xs:enumeration>
 			<xs:enumeration value="FK">
 				<xs:annotation>
-					<xs:documentation>FALKLAND ISLANDS (MALVINAS)</xs:documentation>
+					<xs:documentation>FALKLAND ISLANDS</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="FO">
@@ -663,7 +663,7 @@
 			</xs:enumeration>
 			<xs:enumeration value="VA">
 				<xs:annotation>
-					<xs:documentation>HOLY SEE (VATICAN CITY STATE)</xs:documentation>
+					<xs:documentation>VATICAN CITY STATE</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="HN">
@@ -1410,13 +1410,13 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="export">
+				<xs:element name="export" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Daten zu einem Mandanten</xs:documentation>
 					</xs:annotation>
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="arbeitgebernummer" type="xs:string">
+							<xs:element name="arbeitgebernummer" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Mandantennummer Lang</xs:documentation>
 								</xs:annotation>
@@ -1426,63 +1426,63 @@
 									<xs:documentation>Name</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse1" type="xs:string">
+							<xs:element name="adresse1" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse1</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse2" type="xs:string">
+							<xs:element name="adresse2" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse2</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse3">
+							<xs:element name="adresse3" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Postleitzahl</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="plz" type="xs:string">
+							<xs:element name="plz" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>PLZ</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="ort" type="xs:string">
+							<xs:element name="ort" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Ortschaft</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="laenderCode" type="ISO3166CountyCode">
+							<xs:element name="laenderCode" type="ISO3166CountyCode" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Landcode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="telefon1" type="xs:string">
+							<xs:element name="telefon1" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Telefon privat</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="telefon2" type="xs:string">
+							<xs:element name="telefon2" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Handynummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adrnum" type="xs:integer">
+							<xs:element name="adrnum" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adressnummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="sprcd" type="xs:integer">
+							<xs:element name="sprcd" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sprachcode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 						</xs:sequence>
-						<xs:attribute name="company" type="xs:string">
+						<xs:attribute name="company" type="xs:string" use="required">
 							<xs:annotation>
 								<xs:documentation>Firma</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
-						<xs:attribute name="mandantenNummer" type="xs:string">
+						<xs:attribute name="mandantenNummer" type="xs:string" use="required">
 							<xs:annotation>
 								<xs:documentation>Mandantennummer</xs:documentation>
 							</xs:annotation>
@@ -1490,7 +1490,7 @@
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="version" type="xs:double" fixed="0.1">
+			<xs:attribute name="version" type="xs:double" fixed="0.1" use="required">
 				<xs:annotation>
 					<xs:documentation>Versionsnummer der Dateischnittstelle</xs:documentation>
 				</xs:annotation>
@@ -1504,7 +1504,7 @@
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="export">
+				<xs:element name="export" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Daten zu einem Versicherten</xs:documentation>
 					</xs:annotation>
@@ -1525,52 +1525,52 @@
 									<xs:documentation>Geburtsdatum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse1" type="xs:string">
+							<xs:element name="adresse1" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse 1</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse2" type="xs:string">
+							<xs:element name="adresse2" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse 2</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse3" type="xs:string">
+							<xs:element name="adresse3" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse 3</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="adresse4" type="xs:string">
+							<xs:element name="adresse4" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Adresse 4</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="plz" type="xs:string">
+							<xs:element name="plz" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Postleitzahl</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="ort" type="xs:string">
+							<xs:element name="ort" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Ortschaft</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="laenderCode" type="ISO3166CountyCode">
+							<xs:element name="laenderCode" type="ISO3166CountyCode" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Ländercode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="anrede" type="xs:integer">
+							<xs:element name="anrede" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Anredecode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="ahvNummer" type="xs:integer">
+							<xs:element name="ahvNummer" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Ahvnummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="sovNummer" type="xs:integer">
+							<xs:element name="sovNummer" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sozialversicherungsnummer</xs:documentation>
 								</xs:annotation>
@@ -1580,57 +1580,57 @@
 									<xs:documentation>Mandantennummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="eintrittsdatumFirma" type="xs:date">
+							<xs:element name="eintrittsdatumFirma" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Eintritt Firma</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="versicherungsBeginn" type="xs:date">
+							<xs:element name="versicherungsBeginn" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Beginn Versicherung</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="pensum" type="xs:integer">
+							<xs:element name="pensum" type="xs:integer" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Pensum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="versicherterLohn" type="xs:double">
+							<xs:element name="versicherterLohn" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Lohn</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="versicherterLohnDatum" type="xs:date">
+							<xs:element name="versicherterLohnDatum" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Gültig ab des erfassten Lohnes</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="berechneterLohn" type="xs:double">
+							<xs:element name="berechneterLohn" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Berechneter Lohn</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="maxBerdat" type="xs:date">
+							<xs:element name="maxBerdat" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Maximales Datum bis Mutation gemacht werden können</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="zivilStand" type="zivcd">
+							<xs:element name="zivilStand" type="zivcd" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Zivilstand</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="heiratsdatum" type="xs:date">
+							<xs:element name="heiratsdatum" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Heiratsdatum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="scheidungsdatum" type="xs:date">
+							<xs:element name="scheidungsdatum" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Scheidungsdatum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="todesdatum" type="xs:date">
+							<xs:element name="todesdatum" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Todesdatum</xs:documentation>
 								</xs:annotation>
@@ -1640,7 +1640,7 @@
 									<xs:documentation>Personalnummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="pkNummer2" type="xs:string">
+							<xs:element name="pkNummer2" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>interne Personalnummer</xs:documentation>
 								</xs:annotation>
@@ -1650,157 +1650,157 @@
 									<xs:documentation>Versichertertype VS oder RE</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="telefonNummer" type="xs:string">
+							<xs:element name="telefonNummer" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Telefonnummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="mobilNummer" type="xs:string">
+							<xs:element name="mobilNummer" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Handynummer</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="email" type="xs:string">
+							<xs:element name="email" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Email</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="sprachCode" type="sprcd">
+							<xs:element name="sprachCode" type="sprcd" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sprachcode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
 							<xs:element name="geschlechtsCode" type="sexcd">
 								<xs:annotation>
-									<xs:documentation>Geschlechtscode (1=Männlich 2=Weiblich)</xs:documentation>
+									<xs:documentation>Geschlechtscode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="austrittsdatum" type="xs:date">
+							<xs:element name="austrittsdatum" type="xs:date" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Austrittsdatum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="austrittsgrund" type="ausgrund">
+							<xs:element name="austrittsgrund" type="ausgrund" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Austrittsgrund</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="qstPflicht" type="janein">
+							<xs:element name="qstPflicht" type="janein" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>QstPflicht</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd201" type="xs:string">
+							<xs:element name="bemcd201" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Merbklatt Einkauf </xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd202" type="xs:string">
+							<xs:element name="bemcd202" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Unterlagen weiterhin in Papierform</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd203" type="xs:string">
+							<xs:element name="bemcd203" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Portal MyPk registriert  </xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd724" type="xs:string">
+							<xs:element name="bemcd724" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Unterlagen erhalten für Austrittsdatum</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd710" type="xs:string">
+							<xs:element name="bemcd710" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>KommunikationsEmail</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="bemcd711" type="xs:string">
+							<xs:element name="bemcd711" type="xs:string" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Pincode</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrRIKOAN" type="xs:double">
+							<xs:element name="beitrRIKOAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Beitrag Risikoversicherung AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSPAAN" type="xs:double">
+							<xs:element name="beitrSPAAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sparbeitrag AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrFRSPA" type="xs:double">
+							<xs:element name="beitrFRSPA" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Freiwilliger Sparbeitrag</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSPUAN" type="xs:double">
+							<xs:element name="beitrSPUAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sparbeitrag unb. Urlaub AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrRAEK" type="xs:double">
+							<xs:element name="beitrRAEK" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Rate für Einkauf</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrRIUAN" type="xs:double">
+							<xs:element name="beitrRIUAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Risikobeitrag unb. Urlaub AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSAUAN" type="xs:double">
+							<xs:element name="beitrSAUAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sanierungsbeitrag unb. Urlaub AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSAAN" type="xs:double">
+							<xs:element name="beitrSAAN" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sanierungsbeitrag AN</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrRIAG" type="xs:double">
+							<xs:element name="beitrRIAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Beitrag Risikoversicherung AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrRIBAG" type="xs:double">
+							<xs:element name="beitrRIBAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Risikobeitrag AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSPAAG" type="xs:double">
+							<xs:element name="beitrSPAAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sparbeitrag AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSIFVKAG" type="xs:double">
+							<xs:element name="beitrSIFVKAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Beitrag Sifonds und VK AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrUEAG" type="xs:double">
+							<xs:element name="beitrUEAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Beitrag ÜP AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="beitrSAAG" type="xs:double">
+							<xs:element name="beitrSAAG" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>Sanierungsbeitrag AG</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="maxLohnAkt" type="xs:double">
+							<xs:element name="maxLohnAkt" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>maximaler erfassbarer Lohn aktuelles Jahr</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="maxLohnNeu" type="xs:double">
+							<xs:element name="maxLohnNeu" type="xs:double" minOccurs="0">
 								<xs:annotation>
 									<xs:documentation>maximaler erfassbarer Lohn kommendes Jahr</xs:documentation>
 								</xs:annotation>
 							</xs:element>
-							<xs:element name="partner">
+							<xs:element name="partner" minOccurs="0">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="name" type="xs:string">
@@ -1813,25 +1813,25 @@
 												<xs:documentation>Vorname</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="geburtsdatum" type="xs:string">
+										<xs:element name="geburtsdatum" type="xs:string" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Geburtsdatum</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="sovNummer" type="xs:integer">
+										<xs:element name="sovNummer" type="xs:integer" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Sozialversicherungsnummer</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="geschlechtsCode" type="sexcd">
+										<xs:element name="geschlechtsCode" type="sexcd" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Geschlechtscode (1=Männlich 2=Weiblich)</xs:documentation>
+												<xs:documentation>Geschlechtscode</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
-							<xs:element name="kinder" maxOccurs="unbounded">
+							<xs:element name="kinder" minOccurs="0" maxOccurs="unbounded">
 								<xs:complexType>
 									<xs:sequence>
 										<xs:element name="name" type="xs:string">
@@ -1849,31 +1849,31 @@
 												<xs:documentation>Geburtsdatum</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="sovNummer" type="xs:integer">
+										<xs:element name="sovNummer" type="xs:integer" minOccurs="0">
 											<xs:annotation>
 												<xs:documentation>Sozialversicherungsnummer</xs:documentation>
 											</xs:annotation>
 										</xs:element>
-										<xs:element name="geschlechtsCode" type="sexcd">
+										<xs:element name="geschlechtsCode" type="sexcd" minOccurs="0">
 											<xs:annotation>
-												<xs:documentation>Geschlechtscode (1=Männlich 2=Weiblich)</xs:documentation>
+												<xs:documentation>Geschlechtscode</xs:documentation>
 											</xs:annotation>
 										</xs:element>
 									</xs:sequence>
 								</xs:complexType>
 							</xs:element>
 						</xs:sequence>
-						<xs:attribute name="company" type="xs:string">
+						<xs:attribute name="company" type="xs:string" use="required">
 							<xs:annotation>
 								<xs:documentation>Firma</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
-						<xs:attribute name="mandantenNummer" type="xs:string">
+						<xs:attribute name="mandantenNummer" type="xs:string" use="required">
 							<xs:annotation>
 								<xs:documentation>Arbeitgebernummer</xs:documentation>
 							</xs:annotation>
 						</xs:attribute>
-						<xs:attribute name="pkNummer" type="xs:integer">
+						<xs:attribute name="pkNummer" type="xs:integer" use="required">
 							<xs:annotation>
 								<xs:documentation>Personalnummer des Arbeitgebers</xs:documentation>
 							</xs:annotation>
@@ -1881,7 +1881,7 @@
 					</xs:complexType>
 				</xs:element>
 			</xs:sequence>
-			<xs:attribute name="version" type="xs:double" fixed="0.1">
+			<xs:attribute name="version" type="xs:double" fixed="0.1" use="required">
 				<xs:annotation>
 					<xs:documentation>Versionsnummer der Dateischnittstelle</xs:documentation>
 				</xs:annotation>

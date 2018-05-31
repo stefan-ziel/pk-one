@@ -4,7 +4,7 @@
 		<xs:documentation>
 			<p>
 				Dieses Schema beschreibt die Meldungen die zwischen dem PKONE-Portal und PVCLAN ausgetauscht werden um
-				Simulationen durchzuführen. Die Meldungen gehochen folgenden Namenskonventionen
+				Simulationen durchzufÃ¼hren. Die Meldungen gehochen folgenden Namenskonventionen
 			</p>
 			<ul>
 				<li>Anfragen von PKONE an PVCLAN enden mit "Request"</li>
@@ -13,27 +13,27 @@
 					Eine Simulation besteht aus drei Paaren von Meldung und Antwort
 					<ul>
 						<li>Initialisieren der Simulation mit Infix "Start".</li>
-						<li>Durchführen der Simulation mit Infix "Execute". Dieser Schritt darf beliebig ewiederholt werden.</li>
+						<li>DurchfÃ¼hren der Simulation mit Infix "Execute". Dieser Schritt darf beliebig ewiederholt werden.</li>
 						<li>Beenden der Simulation mit Infix "Execute".</li>
 					</ul>
 				</li>
 			</ul>
 			Alle Meldungen enthalten eine Versionsnummer so dass beide Seiten die korrekte Version dieser
-			Spezifikation prüfen können. Es existiert ein
-			<a hef="https://github.com/stefan-ziel/pk-one">frei zugänglicher Validator</a>
-			der ein beliebiges Protokollelement auf seine Konformität zu diesem Schema überprüft.
+			Spezifikation prÃ¼fen kÃ¶nnen. Es existiert ein
+			<a hef="https://github.com/stefan-ziel/pk-one">frei zugÃ¤nglicher Validator</a>
+			der ein beliebiges Protokollelement auf seine KonformitÃ¤t zu diesem Schema Ã¼berprÃ¼ft.
 		</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="MessageType">
 		<xs:annotation>
 			<xs:documentation>
-				Grundlegender Meldungstyp dessen Attribute von allen Anfrage un Antworten untersützt werden
+				Grundlegender Meldungstyp dessen Attribute von allen Anfrage un Antworten untersÃ¼tzt werden
 			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="Version" fixed="0.2" use="required">
 			<xs:annotation>
 				<xs:documentation>
-					Versionsnummer des Protokolls. Stimmt diese zwischen PKONE und PVCLAN nicht überein wird die Verarbeitung abgebrochen.
+					Versionsnummer des Protokolls. Stimmt diese zwischen PKONE und PVCLAN nicht Ã¼berein wird die Verarbeitung abgebrochen.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -47,14 +47,14 @@
 		<xs:attribute name="Tenant" type="xs:string" use="optional">
 			<xs:annotation>
 				<xs:documentation>
-					Kürzel des PVCLAN-Instanz bei Einsatz in der Cloud.
+					KÃ¼rzel des PVCLAN-Instanz bei Einsatz in der Cloud.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 		<xs:attribute name="Company" type="xs:string" use="optional">
 			<xs:annotation>
 				<xs:documentation>
-					Kürzel der Firma innerhalb einer PVCLAN-Instanz.
+					KÃ¼rzel der Firma innerhalb einer PVCLAN-Instanz.
 				</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
@@ -96,7 +96,7 @@
 	<xs:complexType name="WFMessageType">
 		<xs:annotation>
 			<xs:documentation>
-				Meldungen zum Weiterführen eines Ablaufes
+				Meldungen zum WeiterfÃ¼hren eines Ablaufes
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
@@ -140,7 +140,7 @@
 			<xs:enumeration value="AGKTOTVJ">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Kürzung AGH Total Summe
+						KÃ¼rzung AGH Total Summe
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -182,7 +182,7 @@
 			<xs:enumeration value="ALTGUSIM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Altersguthaben Total für Simulation (BP)
+						Altersguthaben Total fÃ¼r Simulation (BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -378,7 +378,7 @@
 			<xs:enumeration value="BGUP">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Massgebender BG für Üpensanspruch BP
+						Massgebender BG fÃ¼r Anspruch BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -392,21 +392,21 @@
 			<xs:enumeration value="BLOHNE">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Beitragspflichtiger Lohn für Einkauf BP
+						Beitragspflichtiger Lohn fÃ¼r Einkauf BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="BLOHNR">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Beitragspflichtiger Lohn für Risiko BP
+						Beitragspflichtiger Lohn fÃ¼r Risiko BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="BVGTOT">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Freizügigkeit gemäss BVG aktuell
+						FreizÃ¼gigkeit gemÃ¤ss BVG aktuell
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -454,35 +454,35 @@
 			<xs:enumeration value="EKUP60">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Mögl Einkauf Uepens Alter 60 BP
+						MÃ¶gl Einkauf Uepens Alter 60 BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="EKUP61">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Mögl Einkauf Uepens Alter 61 BP
+						MÃ¶gl Einkauf Uepens Alter 61 BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="EKUP62">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Mögl Einkauf Uepens Alter 62 BP
+						MÃ¶gl Einkauf Uepens Alter 62 BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="EKUP63">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Mögl Einkauf Uepens Alter 63 BP
+						MÃ¶gl Einkauf Uepens Alter 63 BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="EKUP64">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Mögl Einkauf Uepens Alter 64 BP
+						MÃ¶gl Einkauf Uepens Alter 64 BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -517,7 +517,7 @@
 			<xs:enumeration value="KAPBEZ">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Gewünschter Kapitalbezug
+						GewÃ¼nschter Kapitalbezug
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -545,7 +545,7 @@
 			<xs:enumeration value="MAXEKS">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Maximal mögliche Einkaufssumme (BP)
+						Maximal mÃ¶gliche Einkaufssumme (BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -566,7 +566,7 @@
 			<xs:enumeration value="MAXUEPBG">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						ÜPens mit BGUP akt
+						ÃœPens mit BGUP akt
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -587,7 +587,7 @@
 			<xs:enumeration value="MMSFRW">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Merkmal Sparbeiträge Freiwllig (2%)
+						Merkmal SparbeitrÃ¤ge Freiwllig (2%)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -601,7 +601,7 @@
 			<xs:enumeration value="PALTGUSIM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Altersguthaben Total für Sim Pens (BP)
+						Altersguthaben Total fÃ¼r Sim Pens (BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -622,7 +622,7 @@
 			<xs:enumeration value="PENUPZU">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Zusatzpension ÜP + VAR Überschuss
+						Zusatzpension ÃœP + VAR Ãœberschuss
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -860,7 +860,7 @@
 			<xs:enumeration value="RATEOFF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						EKS Rate für Offerte (Sim BP)
+						EKS Rate fÃ¼r Offerte (Sim BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -881,7 +881,7 @@
 			<xs:enumeration value="RISAANR">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Risikobeitragssatz AN BP für Report
+						Risikobeitragssatz AN BP fÃ¼r Report
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -916,7 +916,7 @@
 			<xs:enumeration value="RUECKZUEP">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Rückzahlung UEP
+						RÃ¼ckzahlung UEP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -937,7 +937,7 @@
 			<xs:enumeration value="SANSAANR">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Sanierungsbeitragssatz AN BP für Report
+						Sanierungsbeitragssatz AN BP fÃ¼r Report
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -979,14 +979,14 @@
 			<xs:enumeration value="SPARFREIWM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Sparbeiträge Monatlich Freiwillig (2%)
+						SparbeitrÃ¤ge Monatlich Freiwillig (2%)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="SPARFRWMM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Sparbeiträge Freiw Mitgl monatlich
+						SparbeitrÃ¤ge Freiw Mitgl monatlich
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1000,7 +1000,7 @@
 			<xs:enumeration value="SPARSAANR">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Sparbeitragssatz AN BP für Report
+						Sparbeitragssatz AN BP fÃ¼r Report
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1021,7 +1021,7 @@
 			<xs:enumeration value="SPARUUM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Sparbeiträge Monatlich bei unb. Urlaub
+						SparbeitrÃ¤ge Monatlich bei unb. Urlaub
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1063,56 +1063,56 @@
 			<xs:enumeration value="UPENOFF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Tot Üpensbetrag für Offerte (Sim BP)
+						Tot Ãœpensbetrag fÃ¼r Offerte (Sim BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPENSIM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Kto Upens Total für Simulation (BP)
+						Kto Upens Total fÃ¼r Simulation (BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPENSTOT">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Höherer Betrag Upenskto 17 od AGH
+						HÃ¶herer Betrag Upenskto 17 od AGH
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPVOFIJJ">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Üpens Vorfinanziert auf Alter (JJ) BP
+						Ãœpens Vorfinanziert auf Alter (JJ) BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPVOFIJJOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Üpens Vorfin auf Alter (JJ) BP Sim
+						Ãœpens Vorfin auf Alter (JJ) BP Sim
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPVOFIMM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Üpens Vorfinanziert auf Alter (MM) BP
+						Ãœpens Vorfinanziert auf Alter (MM) BP
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPVOFIMMOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Üpens Vorfin auf Alter (MM) BP Sim
+						Ãœpens Vorfin auf Alter (MM) BP Sim
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UPVOFISA">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Üpens Vorfinanziert % </xs:documentation>
+						Ãœpens Vorfinanziert % </xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="UP58M">
@@ -1132,7 +1132,7 @@
 			<xs:enumeration value="UP58SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 58 BP für (Sim)
+						Vorfin Uepens im Alter 58 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1153,7 +1153,7 @@
 			<xs:enumeration value="UP59SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 59 BP für (Sim)
+						Vorfin Uepens im Alter 59 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1174,7 +1174,7 @@
 			<xs:enumeration value="UP60SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 60 BP für (Sim)
+						Vorfin Uepens im Alter 60 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1195,7 +1195,7 @@
 			<xs:enumeration value="UP61SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 61 BP für (Sim)
+						Vorfin Uepens im Alter 61 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1216,7 +1216,7 @@
 			<xs:enumeration value="UP62SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 62 BP für (Sim)
+						Vorfin Uepens im Alter 62 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1237,7 +1237,7 @@
 			<xs:enumeration value="UP63SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 63 BP für (Sim)
+						Vorfin Uepens im Alter 63 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1258,7 +1258,7 @@
 			<xs:enumeration value="UP64SAOF">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Vorfin Uepens im Alter 64 BP für (Sim)
+						Vorfin Uepens im Alter 64 BP fÃ¼r (Sim)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1328,14 +1328,14 @@
 			<xs:enumeration value="VARSIM">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Kto VAR Total für Simulation (BP)
+						Kto VAR Total fÃ¼r Simulation (BP)
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="VARTOT">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Höherer Betrag Kto VAR 17 od AGH
+						HÃ¶herer Betrag Kto VAR 17 od AGH
 					</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
@@ -1395,7 +1395,7 @@
 	<xs:element name="Meldung">
 		<xs:annotation>
 			<xs:documentation xml:lang="de">
-				Informierende oder warnende Meldungen aus PVCLAN. Berechnug wurde durchgeführt.
+				Informierende oder warnende Meldungen aus PVCLAN. Berechnug wurde durchgefÃ¼hrt.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
@@ -1419,7 +1419,7 @@
 	<xs:element name="Fehler">
 		<xs:annotation>
 			<xs:documentation xml:lang="de">
-				Fehlermeldungen aus PVCLAN. Berechnug wurde nicht durchgeführt.
+				Fehlermeldungen aus PVCLAN. Berechnug wurde nicht durchgefÃ¼hrt.
 			</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
@@ -1433,7 +1433,7 @@
 			<xs:attribute name="Details" type="xs:string" use="optional">
 				<xs:annotation>
 					<xs:documentation xml:lang="de">
-						Weiterführende Informationen zu diesem Fehler
+						WeiterfÃ¼hrende Informationen zu diesem Fehler
 					</xs:documentation>
 				</xs:annotation>
 			</xs:attribute>
@@ -1607,7 +1607,7 @@
 						<xs:annotation>
 							<xs:documentation>
 								Das Dokument wird als Elementinhalt in
-								BASE 6 to 4 Kodierung übergeben.
+								BASE 6 to 4 Kodierung Ã¼bergeben.
 							</xs:documentation>
 						</xs:annotation>
 						<xs:complexType mixed="true">
@@ -1633,14 +1633,14 @@
 	<xs:element name="EKSimStartResponse" type="pko:EKType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
-				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+				Einkauf zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="EKSimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe des Einkaufsbetrags</xs:documentation>
+			<xs:documentation>Ãœbergabe des Einkaufsbetrags</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -1660,7 +1660,7 @@
 	<xs:element name="EKSimExecuteResponse" type="pko:EKType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
-				Einkauf zurück die in Portal STEP 3 angezeigt werden sollen
+				Einkauf zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
@@ -1688,14 +1688,14 @@
 	<xs:element name="WEFSimStartResponse" type="pko:WEFType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
-				WEF zurück die in Portal STEP 3 angezeigt werden sollen
+				WEF zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="WEFSimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe des WEF-Betrags</xs:documentation>
+			<xs:documentation>Ãœbergabe des WEF-Betrags</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -1729,7 +1729,7 @@
 	<xs:element name="WEFSimExecuteResponse" type="pko:WEFType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
-				WEF zurück die in Portal STEP 3 angezeigt werden sollen
+				WEF zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
@@ -1771,14 +1771,14 @@
 	<xs:element name="VASimStartResponse" type="pko:ExecuteResponseType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
-				zurück
+				zurÃ¼ck
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="VASimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe des Flags Weiter, mit 1 wird der WF
+			<xs:documentation>Ãœbergabe des Flags Weiter, mit 1 wird der WF
 				abgeschlossen und das Dokument bezogen
 			</xs:documentation>
 		</xs:annotation>
@@ -1869,7 +1869,7 @@
 	<xs:element name="RESimStartResponse" type="pko:ExecuteResponseType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte
-				zurück
+				zurÃ¼ck
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
@@ -1884,14 +1884,14 @@
 	<xs:element name="EINSimStartResponse" type="pko:EINType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
-				Einlage zurück die in Portal STEP 3 angezeigt werden sollen
+				Einlage zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="EINSimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe der Einlagenwerte</xs:documentation>
+			<xs:documentation>Ãœbergabe der Einlagenwerte</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -1916,13 +1916,13 @@
 					</xs:attribute>
 					<xs:attribute type="xs:decimal" name="VAROFF" use="required">
 						<xs:annotation>
-							<xs:documentation xml:lang="de">Konto vorzeitiger Altersrücktritt
+							<xs:documentation xml:lang="de">Konto vorzeitiger AltersrÃ¼cktritt
 							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
 					<xs:attribute type="xs:decimal" name="UPENOFF" use="required">
 						<xs:annotation>
-							<xs:documentation xml:lang="de">Konto Überbrückungspension
+							<xs:documentation xml:lang="de">Konto ÃœberbrÃ¼ckungspension
 							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
@@ -1941,7 +1941,7 @@
 	<xs:element name="EINSimExecuteResponse" type="pko:EINType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte nach
-				Einlagen zurück die in Portal STEP 3 angezeigt werden sollen
+				Einlagen zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
@@ -1981,14 +1981,14 @@
 
 	<xs:element name="FRSSimStartResponse" type="pko:ExecuteResponseType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für den freiwilligen Sparbeitrag
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte fÃ¼r den freiwilligen Sparbeitrag
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="FRSSimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe der Werte für den freiwilligen Sparbeitrag</xs:documentation>
+			<xs:documentation>Ãœbergabe der Werte fÃ¼r den freiwilligen Sparbeitrag</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2019,7 +2019,7 @@
 
 	<xs:element name="FRSSimExecuteResponse" type="pko:ExecuteResponseType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für den freiwilligen Sparbeitrag
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte fÃ¼r den freiwilligen Sparbeitrag
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
@@ -2060,14 +2060,14 @@
 	<xs:element name="KPSimStartResponse" type="pko:KPType">
 		<xs:annotation>
 			<xs:documentation>In dieser Antwort kommen die Berechneten Werte vor
-				dem Kapitalbezug zurück die in Portal STEP 3 angezeigt werden sollen
+				dem Kapitalbezug zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 
 	<xs:element name="KPSimExecuteRequest">
 		<xs:annotation>
-			<xs:documentation>Übergabe des Kapitlabezugbetrags</xs:documentation>
+			<xs:documentation>Ãœbergabe des Kapitlabezugbetrags</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:complexContent>
@@ -2100,8 +2100,8 @@
 
 	<xs:element name="KPSimExecuteResponse" type="pko:KPType">
 		<xs:annotation>
-			<xs:documentation>In dieser Antwort kommen die Berechneten Werte für die Einlage
-				zurück die in Portal STEP 3 angezeigt werden sollen
+			<xs:documentation>In dieser Antwort kommen die Berechneten Werte fÃ¼r die Einlage
+				zurÃ¼ck die in Portal STEP 3 angezeigt werden sollen
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
