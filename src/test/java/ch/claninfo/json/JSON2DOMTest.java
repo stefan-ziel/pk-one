@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.xml.XMLConstants;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -27,9 +30,12 @@ public class JSON2DOMTest {
 	 * @throws IOException
 	 * @throws JSONParseException
 	 * @throws SAXException
+	 * @throws TransformerFactoryConfigurationError
+	 * @throws TransformerException
+	 * @throws TransformerConfigurationException
 	 */
 	@Test
-	public void testParseReaderStringContentHandler() throws JSONParseException, IOException, SAXException {
+	public void testParseReaderStringContentHandler() throws JSONParseException, IOException, SAXException, TransformerConfigurationException, TransformerException, TransformerFactoryConfigurationError {
 		InputStream is = getClass().getResourceAsStream("EKSimExecuteResponse.json"); //$NON-NLS-1$
 		SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = factory.newSchema(getClass().getResource("/ch/claninfo/pkone/pkOne-Meldungen.xsd")); //$NON-NLS-1$

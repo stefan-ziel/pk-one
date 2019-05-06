@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen"
-	xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen"
-	elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.claninfo.ch/2016/pkOne-Meldungen" xmlns:pko="http://www.claninfo.ch/2016/pkOne-Meldungen" elementFormDefault="qualified">
 	<xs:complexType name="MessageType">
 		<xs:annotation>
 			<xs:documentation>Alle Meldungen enthalten zumindest die Version und
@@ -42,11 +39,11 @@
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="pko:MessageType">
-				<xs:attribute type="xs:string" name="Penum" use="required" />				
+				<xs:attribute type="xs:string" name="Penum" use="required" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="WFMessageType">
 		<xs:annotation>
 			<xs:documentation>Meldungen zum weiterführen eines Ablaufes
@@ -58,7 +55,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 
 	<xs:simpleType name="WSValue">
 		<xs:union memberTypes="xs:string xs:decimal xs:dateTime" />
@@ -67,21 +64,21 @@
 	<xs:complexType name="FZVERMAUSZUGType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZVERMAUSZUG" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />		
-								<xs:element name="Position" type="pko:WSValue" />		
-								<xs:element name="Perdatum" type="pko:WSValue" />		
-								<xs:element name="Valuta" type="pko:WSValue" />		
-								<xs:element name="Guthaben" type="pko:WSValue" />		
-								<xs:element name="Zins" type="pko:WSValue" />		
-								<xs:element name="Prozent" type="pko:WSValue" />		
-								<xs:element name="GuthabenVz" type="pko:WSValue" />									
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="Position" type="pko:WSValue" />
+								<xs:element name="Perdatum" type="pko:WSValue" />
+								<xs:element name="Valuta" type="pko:WSValue" />
+								<xs:element name="Guthaben" type="pko:WSValue" />
+								<xs:element name="Zins" type="pko:WSValue" />
+								<xs:element name="Prozent" type="pko:WSValue" />
+								<xs:element name="GuthabenVz" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
@@ -91,234 +88,234 @@
 	<xs:complexType name="FZDEPOTAUSZUGType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZDEPOTAUSZUG" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />		
-								<xs:element name="AnlageNr" type="pko:WSValue" />		
-								<xs:element name="Datum" type="pko:WSValue" />		
-								<xs:element name="Valuta" type="pko:WSValue" />		
-								<xs:element name="AnlageBezl" type="pko:WSValue" />		
-								<xs:element name="AnlageBezk" type="pko:WSValue" />		
-								<xs:element name="Valor" type="pko:WSValue" />		
-								<xs:element name="Anzant" type="pko:WSValue" />		
-								<xs:element name="Kurs" type="pko:WSValue" />		
-								<xs:element name="Total" type="pko:WSValue" />		
-								<xs:element name="Reingewinn" type="pko:WSValue" />		
-								<xs:element name="Abweichung" type="pko:WSValue" />		
-								<xs:element name="Einstand" type="pko:WSValue" />									
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="AnlageNr" type="pko:WSValue" />
+								<xs:element name="Datum" type="pko:WSValue" />
+								<xs:element name="Valuta" type="pko:WSValue" />
+								<xs:element name="AnlageBezl" type="pko:WSValue" />
+								<xs:element name="AnlageBezk" type="pko:WSValue" />
+								<xs:element name="Valor" type="pko:WSValue" />
+								<xs:element name="Anzant" type="pko:WSValue" />
+								<xs:element name="Kurs" type="pko:WSValue" />
+								<xs:element name="Total" type="pko:WSValue" />
+								<xs:element name="Reingewinn" type="pko:WSValue" />
+								<xs:element name="Abweichung" type="pko:WSValue" />
+								<xs:element name="Einstand" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="FZKONTOARTDETType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZKONTOARTDET" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />	
-								<xs:element name="Kontoart" type="pko:WSValue" />	
-								<xs:element name="Bunr" type="pko:WSValue" />	
-								<xs:element name="Buart" type="pko:WSValue" />	
-								<xs:element name="Beleg" type="pko:WSValue" />	
-								<xs:element name="Valuta" type="pko:WSValue" />	
-								<xs:element name="Betrag" type="pko:WSValue" />	
-								<xs:element name="Saldo" type="pko:WSValue" />	
-								<xs:element name="Stobunr" type="pko:WSValue" />	
-								<xs:element name="Budat" type="pko:WSValue" />	
-								<xs:element name="Bustat" type="pko:WSValue" />	
-								<xs:element name="Fibudat" type="pko:WSValue" />	
-								<xs:element name="Butext" type="pko:WSValue" />	
-								<xs:element name="Anlbunr" type="pko:WSValue" />	
-								<xs:element name="Anlagenr" type="pko:WSValue" />	
-								<xs:element name="Anzant" type="pko:WSValue" />	
-								<xs:element name="Anlwert" type="pko:WSValue" />	
-								<xs:element name="Anlbetr" type="pko:WSValue" />	
-								<xs:element name="Pvenum" type="pko:WSValue" />	
-								<xs:element name="Transnr" type="pko:WSValue" />	
-								<xs:element name="Trxsaldo" type="pko:WSValue" />	
-								<xs:element name="Anlreinvest" type="pko:WSValue" />	
-								<xs:element name="Dauinvest" type="pko:WSValue" />								
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="Kontoart" type="pko:WSValue" />
+								<xs:element name="Bunr" type="pko:WSValue" />
+								<xs:element name="Buart" type="pko:WSValue" />
+								<xs:element name="Beleg" type="pko:WSValue" />
+								<xs:element name="Valuta" type="pko:WSValue" />
+								<xs:element name="Betrag" type="pko:WSValue" />
+								<xs:element name="Saldo" type="pko:WSValue" />
+								<xs:element name="Stobunr" type="pko:WSValue" />
+								<xs:element name="Budat" type="pko:WSValue" />
+								<xs:element name="Bustat" type="pko:WSValue" />
+								<xs:element name="Fibudat" type="pko:WSValue" />
+								<xs:element name="Butext" type="pko:WSValue" />
+								<xs:element name="Anlbunr" type="pko:WSValue" />
+								<xs:element name="Anlagenr" type="pko:WSValue" />
+								<xs:element name="Anzant" type="pko:WSValue" />
+								<xs:element name="Anlwert" type="pko:WSValue" />
+								<xs:element name="Anlbetr" type="pko:WSValue" />
+								<xs:element name="Pvenum" type="pko:WSValue" />
+								<xs:element name="Transnr" type="pko:WSValue" />
+								<xs:element name="Trxsaldo" type="pko:WSValue" />
+								<xs:element name="Anlreinvest" type="pko:WSValue" />
+								<xs:element name="Dauinvest" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="FZKONTOARTType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZKONTOART" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />	
-								<xs:element name="Ktoart" type="pko:WSValue" />	
-								<xs:element name="Ktobezl" type="pko:WSValue" />	
-								<xs:element name="Ktobezk" type="pko:WSValue" />	
-								<xs:element name="Saldo" type="pko:WSValue" />								
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="Ktoart" type="pko:WSValue" />
+								<xs:element name="Ktobezl" type="pko:WSValue" />
+								<xs:element name="Ktobezk" type="pko:WSValue" />
+								<xs:element name="Saldo" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="FZANLKONTODETType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZANLKONTODET" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />	
-								<xs:element name="Anlbunr" type="pko:WSValue" />	
-								<xs:element name="AnlageNr" type="pko:WSValue" />	
-								<xs:element name="Buart" type="pko:WSValue" />	
-								<xs:element name="Anrast" type="pko:WSValue" />	
-								<xs:element name="Beleg" type="pko:WSValue" />	
-								<xs:element name="Valuta" type="pko:WSValue" />	
-								<xs:element name="Anlbucd" type="pko:WSValue" />	
-								<xs:element name="Handeldat" type="pko:WSValue" />	
-								<xs:element name="Anlwert" type="pko:WSValue" />	
-								<xs:element name="Anzant" type="pko:WSValue" />	
-								<xs:element name="Stobunr" type="pko:WSValue" />	
-								<xs:element name="Budat" type="pko:WSValue" />	
-								<xs:element name="Pendenz" type="pko:WSValue" />	
-								<xs:element name="Herkunft" type="pko:WSValue" />	
-								<xs:element name="Trxnr" type="pko:WSValue" />	
-								<xs:element name="Butext" type="pko:WSValue" />	
-								<xs:element name="Ekurs" type="pko:WSValue" />	
-								<xs:element name="Ewert" type="pko:WSValue" />	
-								<xs:element name="Rgewinn" type="pko:WSValue" />	
-								<xs:element name="Bestand" type="pko:WSValue" />	
-								<xs:element name="Ekorrdm" type="pko:WSValue" />	
-								<xs:element name="Ekorrum" type="pko:WSValue" />	
-								<xs:element name="Transnr" type="pko:WSValue" />	
-								<xs:element name="Eproz" type="pko:WSValue" />	
-								<xs:element name="Anlbezl" type="pko:WSValue" />	
-								<xs:element name="Anlbezk" type="pko:WSValue" />								
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="Anlbunr" type="pko:WSValue" />
+								<xs:element name="AnlageNr" type="pko:WSValue" />
+								<xs:element name="Buart" type="pko:WSValue" />
+								<xs:element name="Anrast" type="pko:WSValue" />
+								<xs:element name="Beleg" type="pko:WSValue" />
+								<xs:element name="Valuta" type="pko:WSValue" />
+								<xs:element name="Anlbucd" type="pko:WSValue" />
+								<xs:element name="Handeldat" type="pko:WSValue" />
+								<xs:element name="Anlwert" type="pko:WSValue" />
+								<xs:element name="Anzant" type="pko:WSValue" />
+								<xs:element name="Stobunr" type="pko:WSValue" />
+								<xs:element name="Budat" type="pko:WSValue" />
+								<xs:element name="Pendenz" type="pko:WSValue" />
+								<xs:element name="Herkunft" type="pko:WSValue" />
+								<xs:element name="Trxnr" type="pko:WSValue" />
+								<xs:element name="Butext" type="pko:WSValue" />
+								<xs:element name="Ekurs" type="pko:WSValue" />
+								<xs:element name="Ewert" type="pko:WSValue" />
+								<xs:element name="Rgewinn" type="pko:WSValue" />
+								<xs:element name="Bestand" type="pko:WSValue" />
+								<xs:element name="Ekorrdm" type="pko:WSValue" />
+								<xs:element name="Ekorrum" type="pko:WSValue" />
+								<xs:element name="Transnr" type="pko:WSValue" />
+								<xs:element name="Eproz" type="pko:WSValue" />
+								<xs:element name="Anlbezl" type="pko:WSValue" />
+								<xs:element name="Anlbezk" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="FZANLKONTOType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZANLKONTO" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />	
-								<xs:element name="AnlageNr" type="pko:WSValue" />	
-								<xs:element name="Anlagebezl" type="pko:WSValue" />	
-								<xs:element name="Anlagebezk" type="pko:WSValue" />	
-								<xs:element name="Saldoanteile" type="pko:WSValue" />	
-								<xs:element name="Valor" type="pko:WSValue" />								
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="AnlageNr" type="pko:WSValue" />
+								<xs:element name="Anlagebezl" type="pko:WSValue" />
+								<xs:element name="Anlagebezk" type="pko:WSValue" />
+								<xs:element name="Saldoanteile" type="pko:WSValue" />
+								<xs:element name="Valor" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="FZKONTOType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="FZKONTO" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Kontoid" type="pko:WSValue" />	
-								<xs:element name="Penum" type="pko:WSValue" />															
+								<xs:element name="Kontoid" type="pko:WSValue" />
+								<xs:element name="Penum" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="STAMMDATENVSType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="STAMMDATENVS" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="Vsnum" type="pko:WSValue" />	
-								<xs:element name="Name" type="pko:WSValue" />	
-								<xs:element name="Vname" type="pko:WSValue" />	
-								<xs:element name="Sexcd" type="pko:WSValue" />	
-								<xs:element name="Sprcd" type="pko:WSValue" />	
-								<xs:element name="Gebdat" type="pko:WSValue" />	
-								<xs:element name="Toddat" type="pko:WSValue" />	
-								<xs:element name="Ahvnr" type="pko:WSValue" />	
-								<xs:element name="Sovnr" type="pko:WSValue" />	
-								<xs:element name="Penum" type="pko:WSValue" />	
-								<xs:element name="Penum2" type="pko:WSValue" />	
-								<xs:element name="Zivcd" type="pko:WSValue" />	
-								<xs:element name="Qstpfl" type="pko:WSValue" />	
-								<xs:element name="Niederlb" type="pko:WSValue" />	
-								<xs:element name="Persnr" type="pko:WSValue" />	
-								<xs:element name="Mitnum" type="pko:WSValue" />	
-								<xs:element name="Mitbez" type="pko:WSValue" />	
-								<xs:element name="Mitname" type="pko:WSValue" />	
-								<xs:element name="Ankdat" type="pko:WSValue" />	
-								<xs:element name="Einfid" type="pko:WSValue" />	
-								<xs:element name="Einvod" type="pko:WSValue" />	
-								<xs:element name="Ausfid" type="pko:WSValue" />	
-								<xs:element name="Ausvod" type="pko:WSValue" />	
-								<xs:element name="Ausgrund" type="pko:WSValue" />	
-								<xs:element name="Vspendenz" type="pko:WSValue" />	
-								<xs:element name="Vsaktiv" type="pko:WSValue" />	
-								<xs:element name="Gesvorb" type="pko:WSValue" />	
-								<xs:element name="VsnumAtmi" type="pko:WSValue" />	
-								<xs:element name="Lastberdat" type="pko:WSValue" />	
-								<xs:element name="Lastbercd" type="pko:WSValue" />	
-								<xs:element name="Anrk" type="pko:WSValue" />	
-								<xs:element name="Anrl" type="pko:WSValue" />	
-								<xs:element name="Adresse1" type="pko:WSValue" />	
-								<xs:element name="Adresse2" type="pko:WSValue" />	
-								<xs:element name="Adresse3" type="pko:WSValue" />	
-								<xs:element name="Adresse4" type="pko:WSValue" />	
-								<xs:element name="Ort" type="pko:WSValue" />	
-								<xs:element name="Plz" type="pko:WSValue" />	
-								<xs:element name="Plzzus" type="pko:WSValue" />	
-								<xs:element name="Landcd" type="pko:WSValue" />	
-								<xs:element name="Land" type="pko:WSValue" />								
+								<xs:element name="Vsnum" type="pko:WSValue" />
+								<xs:element name="Name" type="pko:WSValue" />
+								<xs:element name="Vname" type="pko:WSValue" />
+								<xs:element name="Sexcd" type="pko:WSValue" />
+								<xs:element name="Sprcd" type="pko:WSValue" />
+								<xs:element name="Gebdat" type="pko:WSValue" />
+								<xs:element name="Toddat" type="pko:WSValue" />
+								<xs:element name="Ahvnr" type="pko:WSValue" />
+								<xs:element name="Sovnr" type="pko:WSValue" />
+								<xs:element name="Penum" type="pko:WSValue" />
+								<xs:element name="Penum2" type="pko:WSValue" />
+								<xs:element name="Zivcd" type="pko:WSValue" />
+								<xs:element name="Qstpfl" type="pko:WSValue" />
+								<xs:element name="Niederlb" type="pko:WSValue" />
+								<xs:element name="Persnr" type="pko:WSValue" />
+								<xs:element name="Mitnum" type="pko:WSValue" />
+								<xs:element name="Mitbez" type="pko:WSValue" />
+								<xs:element name="Mitname" type="pko:WSValue" />
+								<xs:element name="Ankdat" type="pko:WSValue" />
+								<xs:element name="Einfid" type="pko:WSValue" />
+								<xs:element name="Einvod" type="pko:WSValue" />
+								<xs:element name="Ausfid" type="pko:WSValue" />
+								<xs:element name="Ausvod" type="pko:WSValue" />
+								<xs:element name="Ausgrund" type="pko:WSValue" />
+								<xs:element name="Vspendenz" type="pko:WSValue" />
+								<xs:element name="Vsaktiv" type="pko:WSValue" />
+								<xs:element name="Gesvorb" type="pko:WSValue" />
+								<xs:element name="VsnumAtmi" type="pko:WSValue" />
+								<xs:element name="Lastberdat" type="pko:WSValue" />
+								<xs:element name="Lastbercd" type="pko:WSValue" />
+								<xs:element name="Anrk" type="pko:WSValue" />
+								<xs:element name="Anrl" type="pko:WSValue" />
+								<xs:element name="Adresse1" type="pko:WSValue" />
+								<xs:element name="Adresse2" type="pko:WSValue" />
+								<xs:element name="Adresse3" type="pko:WSValue" />
+								<xs:element name="Adresse4" type="pko:WSValue" />
+								<xs:element name="Ort" type="pko:WSValue" />
+								<xs:element name="Plz" type="pko:WSValue" />
+								<xs:element name="Plzzus" type="pko:WSValue" />
+								<xs:element name="Landcd" type="pko:WSValue" />
+								<xs:element name="Land" type="pko:WSValue" />
 							</xs:sequence>
 						</xs:complexType>
-					</xs:element>					
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
-	
-	
+
+
+
 	<xs:simpleType name="SimParam">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PENUM" />
@@ -403,59 +400,59 @@
 	<xs:simpleType name="RowValue">
 		<xs:union memberTypes="xs:string xs:decimal xs:dateTime" />
 	</xs:simpleType>
-	
+
 	<xs:complexType name="OBType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
-				<xs:sequence>					
+				<xs:sequence>
 					<xs:element name="Vers" maxOccurs="unbounded" minOccurs="0">
-			          <xs:complexType>
-			            <xs:sequence>
-			              <xs:element type="pko:RowValue" name="Name"/>
-			              <xs:element type="pko:RowValue" name="Vname"/>
-			              <xs:element type="pko:RowValue" name="Sexcd"/>
-			              <xs:element type="pko:RowValue" name="Sprcd"/>
-			              <xs:element type="pko:RowValue" name="Gebdat"/>
-			              <xs:element type="pko:RowValue" name="Toddat"/>
-			              <xs:element type="pko:RowValue" name="Ahvnr"/>
-			              <xs:element type="pko:RowValue" name="Sovnr"/>
-			              <xs:element type="pko:RowValue" name="Penum2"/>
-			              <xs:element type="pko:RowValue" name="Zivcd"/>
-			              <xs:element type="pko:RowValue" name="Qstpfl"/>
-			              <xs:element type="pko:RowValue" name="Niederlb"/>
-			              <xs:element type="pko:RowValue" name="Mitnum"/>
-			              <xs:element type="pko:RowValue" name="Mitbez"/>
-			              <xs:element type="pko:RowValue" name="Mitname"/>
-			              <xs:element type="pko:RowValue" name="Ankdat"/>
-			              <xs:element type="pko:RowValue" name="Einfid"/>
-			              <xs:element type="pko:RowValue" name="Einvod"/>
-			              <xs:element type="pko:RowValue" name="PARA1"/>
-			              <xs:element type="pko:RowValue" name="Ausfid"/>
-			              <xs:element type="pko:RowValue" name="Ausvod"/>
-			              <xs:element type="pko:RowValue" name="Ausgrund"/>
-			              <xs:element type="pko:RowValue" name="Vspendenz"/>
-			              <xs:element type="pko:RowValue" name="Vsaktiv"/>
-			              <xs:element type="pko:RowValue" name="Anrk"/>           
-			              <xs:element type="pko:RowValue" name="Anrl"/>
-			              <xs:element type="pko:RowValue" name="Adresse1"/>
-			              <xs:element type="pko:RowValue" name="Adresse2"/>
-			              <xs:element type="pko:RowValue" name="Adresse3"/>
-			              <xs:element type="pko:RowValue" name="Adresse4"/>
-			              <xs:element type="pko:RowValue" name="Ort"/>
-			              <xs:element type="pko:RowValue" name="Plz"/>
-			              <xs:element type="pko:RowValue" name="Plzzus"/>
-			              <xs:element type="pko:RowValue" name="Landcd"/>
-			              <xs:element type="pko:RowValue" name="Land"/>
-			            </xs:sequence>
-			          </xs:complexType>
-			        </xs:element>	
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element type="pko:RowValue" name="Name" />
+								<xs:element type="pko:RowValue" name="Vname" />
+								<xs:element type="pko:RowValue" name="Sexcd" />
+								<xs:element type="pko:RowValue" name="Sprcd" />
+								<xs:element type="pko:RowValue" name="Gebdat" />
+								<xs:element type="pko:RowValue" name="Toddat" />
+								<xs:element type="pko:RowValue" name="Ahvnr" />
+								<xs:element type="pko:RowValue" name="Sovnr" />
+								<xs:element type="pko:RowValue" name="Penum2" />
+								<xs:element type="pko:RowValue" name="Zivcd" />
+								<xs:element type="pko:RowValue" name="Qstpfl" />
+								<xs:element type="pko:RowValue" name="Niederlb" />
+								<xs:element type="pko:RowValue" name="Mitnum" />
+								<xs:element type="pko:RowValue" name="Mitbez" />
+								<xs:element type="pko:RowValue" name="Mitname" />
+								<xs:element type="pko:RowValue" name="Ankdat" />
+								<xs:element type="pko:RowValue" name="Einfid" />
+								<xs:element type="pko:RowValue" name="Einvod" />
+								<xs:element type="pko:RowValue" name="PARA1" />
+								<xs:element type="pko:RowValue" name="Ausfid" />
+								<xs:element type="pko:RowValue" name="Ausvod" />
+								<xs:element type="pko:RowValue" name="Ausgrund" />
+								<xs:element type="pko:RowValue" name="Vspendenz" />
+								<xs:element type="pko:RowValue" name="Vsaktiv" />
+								<xs:element type="pko:RowValue" name="Anrk" />
+								<xs:element type="pko:RowValue" name="Anrl" />
+								<xs:element type="pko:RowValue" name="Adresse1" />
+								<xs:element type="pko:RowValue" name="Adresse2" />
+								<xs:element type="pko:RowValue" name="Adresse3" />
+								<xs:element type="pko:RowValue" name="Adresse4" />
+								<xs:element type="pko:RowValue" name="Ort" />
+								<xs:element type="pko:RowValue" name="Plz" />
+								<xs:element type="pko:RowValue" name="Plzzus" />
+								<xs:element type="pko:RowValue" name="Landcd" />
+								<xs:element type="pko:RowValue" name="Land" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
 					<xs:element ref="pko:Fehler" minOccurs="0" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
-	
+
+
 	<xs:complexType name="VAType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
@@ -473,10 +470,8 @@
 					</xs:element>
 					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Name" type="pko:SimParam" />
-								<xs:element name="Wert" type="pko:SimValue" />
-							</xs:sequence>
+							<xs:attribute name="Name" type="pko:SimParam" />
+							<xs:attribute name="Wert" type="pko:SimValue" />
 						</xs:complexType>
 					</xs:element>
 					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
@@ -516,10 +511,8 @@
 
 					<xs:element name="Simulation" minOccurs="0" maxOccurs="unbounded">
 						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="Name" type="pko:SimParam" />
-								<xs:element name="Wert" type="pko:SimValue" />
-							</xs:sequence>
+							<xs:attribute name="Name" type="pko:SimParam" />
+							<xs:attribute name="Wert" type="pko:SimValue" />
 						</xs:complexType>
 					</xs:element>
 					<xs:element name="Meldung" minOccurs="0" maxOccurs="unbounded">
@@ -533,7 +526,7 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="REType">
 		<xs:complexContent>
 			<xs:extension base="pko:WFMessageType">
@@ -563,7 +556,7 @@
 					<xs:element name="Dokument" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation>
-								Das Dokument wird als Elementinhalt in 
+								Das Dokument wird als Elementinhalt in
 								BASE 6 to 4 Kodierung übergeben.
 							</xs:documentation>
 						</xs:annotation>
@@ -666,13 +659,12 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
-				   <xs:attribute type="xs:decimal" name="EndSimulation"
-						use="required">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Immer 1 im Executerequest
 							</xs:documentation>
 						</xs:annotation>
-					</xs:attribute>				
+					</xs:attribute>
 					<xs:attribute type="xs:dateTime" name="ValutaNeu" use="required">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Valutadatum /
@@ -680,8 +672,7 @@
 							</xs:documentation>
 						</xs:annotation>
 					</xs:attribute>
-					<!-- <xs:attribute type="xs:decimal" name="Weiter" use="required"> <xs:annotation> 
-						<xs:documentation xml:lang="de"></xs:documentation> </xs:annotation> </xs:attribute> -->
+					<!-- <xs:attribute type="xs:decimal" name="Weiter" use="required"> <xs:annotation> <xs:documentation xml:lang="de"></xs:documentation> </xs:annotation> </xs:attribute> -->
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -701,14 +692,13 @@
 		<xs:complexType>
 			<xs:complexContent>
 				<xs:extension base="pko:WFMessageType">
-					<xs:attribute type="xs:decimal" name="EndSimulation"
-						use="required">
+					<xs:attribute type="xs:decimal" name="EndSimulation" use="required">
 						<xs:annotation>
 							<xs:documentation xml:lang="de">Indikator, dass
 								Simulation beendet werden soll, immer 2 im EndRequest!
 							</xs:documentation>
 						</xs:annotation>
-					</xs:attribute>					
+					</xs:attribute>
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -720,8 +710,8 @@
 			</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	
-		<!-- SIM RE 1 Stepper -->
+
+	<!-- SIM RE 1 Stepper -->
 	<xs:element name="RESimStartRequest">
 		<xs:annotation>
 			<xs:documentation>Eine Rentensimulation</xs:documentation>
@@ -730,22 +720,22 @@
 			<xs:complexContent>
 				<xs:extension base="pko:MessageType">
 					<xs:attribute type="xs:string" name="Mitnum" use="required" />
-					<xs:attribute type="xs:dateTime" name="Geburtsdatum" use="required"/>
+					<xs:attribute type="xs:dateTime" name="Geburtsdatum" use="required" />
 					<xs:attribute name="Sparplan" use="required">
 						<xs:simpleType>
 							<xs:restriction base="xs:string">
-								<xs:enumeration value="Standard"/>
-								<xs:enumeration value="Plus"/>
-								<xs:enumeration value="Minus"/>
+								<xs:enumeration value="Standard" />
+								<xs:enumeration value="Plus" />
+								<xs:enumeration value="Minus" />
 							</xs:restriction>
 						</xs:simpleType>
 					</xs:attribute>
-					<xs:attribute type="xs:dateTime" name="Stichtag" use="required"/>
-					<xs:attribute type="xs:double" name="Jahreslohn" use="required"/>
-					<xs:attribute type="xs:double" name="Sparkapital" use="required"/>
-					<xs:attribute type="xs:dateTime" name="PensDatVor" use="required"/>
-					<xs:attribute type="xs:dateTime" name="PensDatNach" use="required"/>
-					<xs:attribute type="xs:double" name="Projektionszinssatz" use="required"/>
+					<xs:attribute type="xs:dateTime" name="Stichtag" use="required" />
+					<xs:attribute type="xs:double" name="Jahreslohn" use="required" />
+					<xs:attribute type="xs:double" name="Sparkapital" use="required" />
+					<xs:attribute type="xs:dateTime" name="PensDatVor" use="required" />
+					<xs:attribute type="xs:dateTime" name="PensDatNach" use="required" />
+					<xs:attribute type="xs:double" name="Projektionszinssatz" use="required" />
 				</xs:extension>
 			</xs:complexContent>
 		</xs:complexType>
@@ -759,170 +749,178 @@
 		</xs:annotation>
 	</xs:element>
 
- 	<!--  WS Definitionen -->
- 		<xs:element name="StammdatenVSStartRequest">
-			<xs:annotation>
-				<xs:documentation>XXX Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:string" name="Penum" use="required"/>											   					
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="StammdatenVSStartResponse" type="pko:STAMMDATENVSType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS STAMMDATENVS
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
+	<!-- WS Definitionen -->
+	<xs:element name="StammdatenVSStartRequest">
+		<xs:annotation>
+			<xs:documentation>XXX Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:string" name="Penum" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
 
- 		<xs:element name="FZKontoStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZKonto Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <<xs:attribute type="xs:string" name="Penum" use="required"/>										
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZKontoStartResponse" type="pko:FZKontoType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZKonto
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
+	<xs:element name="StammdatenVSStartResponse" type="pko:STAMMDATENVSType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS STAMMDATENVS
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
 
- 		<xs:element name="FZAnlkontoStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZAnlkonto Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:string" name="Penum" use="required"/>	
-					   <xs:attribute type="xs:decimal" name="Kontoid" use="required"/>	
-					   <xs:attribute type="xs:string" name="AnlageNr" use="optional"/>						
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZAnlkontoStartResponse" type="pko:FZANLKONTOType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZAnlkonto
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
-		
- 		<xs:element name="FZAnlkontoDetStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZAnlkontoDet Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:date" name="Vondat" use="optional"/>	
-					   <xs:attribute type="xs:date" name="Bisdat" use="optional"/>	
-					   <xs:attribute type="xs:deciaml" name="Kontoid" use="required"/>						
-					   <xs:attribute type="xs:string" name="AnlageNr" use="optional"/>						
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZAnlkontoDetStartResponse" type="pko:FZANLKONTODETType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZAnlkontoDet
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
-		
- 		<xs:element name="FZKontoartStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZKontoart Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:string" name="Kontoart" use="optional"/>
-					   <xs:attribute type="xs:string" name="Penum" use="optional"/>	
-					   <xs:attribute type="xs:decimal" name="Kontoid" use="required"/>							
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZKontoartStartResponse" type="pko:FZKONTOARTType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZKontoart
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
-		
- 		<xs:element name="FZKontoartDetStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZKontoartDet Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:date" name="Vondat" use="optional"/>	
-					   <xs:attribute type="xs:date" name="Bisdat" use="optional"/>	
-					   <xs:attribute type="xs:deciaml" name="Kontoid" use="required"/>						
-					   <xs:attribute type="xs:string" name="Kontoart" use="optional"/>					
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZKontoartDetStartResponse" type="pko:FZKONTOARTDETType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZKontoartDet
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
-		
- 		<xs:element name="FZDepotauszugStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZDepotauszug Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:decimal" name="Kontoid" use="required"/>						
-					   <xs:attribute type="xs:dateTime" name="Berdat" use="required"/>						
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZDepotauszugStartResponse" type="pko:FZDEPOTAUSZUGType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZDepotauszug
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>
-		
- 		<xs:element name="FZVermauszugStartRequest">
-			<xs:annotation>
-				<xs:documentation>FZVermauszug Service</xs:documentation>
-			</xs:annotation>
-			<xs:complexType>
-				<xs:complexContent>
-					<xs:extension base="pko:WFMessageType">
-					   <xs:attribute type="xs:decimal" name="Kontoid" use="required"/>						
-					   <xs:attribute type="xs:dateTime" name="Berdat" use="required"/>							
-				</xs:complexContent>
-			</xs:complexType>
-		</xs:element>
-		
-		<xs:element name="FZVermauszugStartResponse" type="pko:FZVERMAUSZUGType">
-				<xs:annotation>
-					<xs:documentation>Resultate des WS FZVermauszug
-					</xs:documentation>
-				</xs:annotation>
-		</xs:element>		
-		
-		<!--  WS Definitionen End-->												
+	<xs:element name="FZKontoStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZKonto Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:string" name="Penum" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZKontoStartResponse" type="pko:FZKONTOType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZKonto
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZAnlkontoStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZAnlkonto Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:string" name="Penum" use="required" />
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+					<xs:attribute type="xs:string" name="AnlageNr" use="optional" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZAnlkontoStartResponse" type="pko:FZANLKONTOType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZAnlkonto
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZAnlkontoDetStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZAnlkontoDet Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:date" name="Vondat" use="optional" />
+					<xs:attribute type="xs:date" name="Bisdat" use="optional" />
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+					<xs:attribute type="xs:string" name="AnlageNr" use="optional" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZAnlkontoDetStartResponse" type="pko:FZANLKONTODETType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZAnlkontoDet
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZKontoartStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZKontoart Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:string" name="Kontoart" use="optional" />
+					<xs:attribute type="xs:string" name="Penum" use="optional" />
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZKontoartStartResponse" type="pko:FZKONTOARTType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZKontoart
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZKontoartDetStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZKontoartDet Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:date" name="Vondat" use="optional" />
+					<xs:attribute type="xs:date" name="Bisdat" use="optional" />
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+					<xs:attribute type="xs:string" name="Kontoart" use="optional" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZKontoartDetStartResponse" type="pko:FZKONTOARTDETType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZKontoartDet
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZDepotauszugStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZDepotauszug Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+					<xs:attribute type="xs:dateTime" name="Berdat" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZDepotauszugStartResponse" type="pko:FZDEPOTAUSZUGType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZDepotauszug
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:element name="FZVermauszugStartRequest">
+		<xs:annotation>
+			<xs:documentation>FZVermauszug Service</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="pko:WFMessageType">
+					<xs:attribute type="xs:decimal" name="Kontoid" use="required" />
+					<xs:attribute type="xs:dateTime" name="Berdat" use="required" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="FZVermauszugStartResponse" type="pko:FZVERMAUSZUGType">
+		<xs:annotation>
+			<xs:documentation>Resultate des WS FZVermauszug
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<!-- WS Definitionen End -->
 </xs:schema>

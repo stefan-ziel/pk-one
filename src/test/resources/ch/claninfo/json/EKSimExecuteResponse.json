@@ -1,13 +1,13 @@
 {
-	"Version":"0.1",
+	"Version":"0.2",
 	"Sprache":"de",
 	"ProzessID":213414, 
 	"Applikation":{
 		"EKS.max":305003.65
 	},
 	"Simulation":[
-		{"Name":"MaxEKSTar","Wert":408802.65},
-		{"Name":"Sparkap","Wert":103799.00}
+		{"Name":"EKMAXEFF","Wert":408802.65},
+		{"Name":"MAXEKSUMME","Wert":103799.00}
 	],
 	"Meldung":[
 	  { "Nummer":"4711",

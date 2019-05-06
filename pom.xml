@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ch.claninfo.pkone</groupId>
 	<artifactId>validator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>Interface Validator</name>
 	<build>
 		<plugins>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<EKSimExecuteResponse Version="0.1"  Sprache="de" ProzessID="213414">
+<EKSimExecuteResponse Version="0.2"  Sprache="de" ProzessID="213414">
 	<Applikation EKS.max="305003.65"/>
 	<Simulation Name="MaxEKSTar" Wert="408802.65"/>
 	<Simulation Name="Sparkap" Wert="103799.00"/>
